@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ООО «ПРОФИТЛОГИСТИКС» — Кузова и ковши для CAT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#0A0A0A;color:#fff;font-family:Inter,sans-serif;overflow-x:hidden;line-height:1.6}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:inherit;border:none;outline:none}
+input,textarea{font-family:inherit}
+:root{
+  --yellow:#FFCD11;--orange:#FF8C00;--bg:#0A0A0A;--card:#111111;
+  --card-elevated:#1A1A1A;--text-secondary:#9CA3AF;
+  --border:rgba(255,255,255,0.08);--transition:200ms ease;
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:#111}
+::-webkit-scrollbar-thumb{background:var(--yellow);border-radius:3px}
+#preloader{position:fixed;inset:0;background:#0A0A0A;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity 0.6s ease,visibility 0.6s ease}
+#preloader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.pl-logo{width:90px;height:90px;border-radius:50%;background:var(--yellow);display:flex;align-items:center;justify-content:center;animation:plPulse 1s ease-in-out infinite alternate;box-shadow:0 0 40px rgba(255,205,17,0.4)}
+.pl-logo span{font-family:"Bebas Neue",sans-serif;font-size:2rem;color:#0A0A0A;letter-spacing:2px}
+@keyframes plPulse{from{transform:scale(0.92)}to{transform:scale(1.08);box-shadow:0 0 50px 20px rgba(255,205,17,0.08)}}
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2rem;height:68px;display:flex;align-items:center;justify-content:space-between;transition:background var(--transition),border-bottom var(--transition)}
+#nav.scrolled{background:rgba(10,10,10,0.96);border-bottom:1px solid var(--border);backdrop-filter:blur(12px)}
+.nav-logo{font-family:"Bebas Neue",sans-serif;font-size:1.4rem;letter-spacing:3px;color:var(--yellow)}
+.nav-logo span{color:#fff}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:0.82rem;font-weight:500;color:var(--text-secondary);letter-spacing:1.5px;text-transform:uppercase;transition:color var(--transition)}
+.nav-links a:hover{color:var(--yellow)}
+.nav-cta{background:var(--yellow);color:#0A0A0A;font-weight:700;font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;padding:0.6rem 1.4rem;border-radius:4px;cursor:pointer;transition:background var(--transition),transform var(--transition)}
+.nav-cta:hover{background:#e6b800;transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;transition:all 0.3s ease}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:rgba(10,10,10,0.98);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:1.5rem 2rem;z-index:999}
+.mobile-menu.open{display:block}
+.mobile-menu ul{list-style:none;display:flex;flex-direction:column;gap:1.2rem}
+.mobile-menu a{font-size:1rem;font-weight:500;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px}
+.mobile-menu a:hover{color:var(--yellow)}
+.mobile-cta{display:inline-block;background:var(--yellow);color:#0A0A0A;font-weight:700;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;padding:0.75rem 1.8rem;border-radius:4px;margin-top:1rem;cursor:pointer}
+#hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding:120px 2rem 80px}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,205,17,0.08) 1px,transparent 1px);background-size:32px 32px}
+.geo-shapes{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.geo-shape{position:absolute;background:linear-gradient(135deg,rgba(255,205,17,0.06),rgba(255,140,0,0.04));border:1px solid rgba(255,205,17,0.12);animation:geoFloat 8s ease-in-out infinite}
+.geo-shape:nth-child(1){width:340px;height:80px;top:18%;right:-60px;transform:rotate(-15deg);animation-delay:0s}
+.geo-shape:nth-child(2){width:200px;height:50px;top:40%;right:10%;transform:rotate(-15deg);animation-delay:1.5s}
+.geo-shape:nth-child(3){width:480px;height:100px;bottom:25%;left:-80px;transform:rotate(-12deg);animation-delay:0.8s}
+.geo-shape:nth-child(4){width:150px;height:40px;top:60%;right:25%;transform:rotate(-15deg);animation-delay:2s}
+.geo-shape:nth-child(5){width:260px;height:60px;bottom:15%;right:5%;transform:rotate(-15deg);animation-delay:1s}
+@keyframes geoFloat{0%,100%{transform:rotate(-15deg) translateY(0)}50%{transform:rotate(-15deg) translateY(-12px)}}
+.hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;width:100%}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,205,17,0.1);border:1px solid rgba(255,205,17,0.25);border-radius:24px;padding:0.4rem 1rem;margin-bottom:2rem}
+.hero-badge-dot{width:8px;height:8px;border-radius:50%;background:var(--yellow);animation:badgePulse 2s infinite}
+@keyframes badgePulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.hero-badge-text{font-size:0.78rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--yellow)}
+.hero-title{font-family:"Bebas Neue",sans-serif;font-size:clamp(2.8rem,7vw,6rem);line-height:1.05;letter-spacing:3px;color:#fff;margin-bottom:1.5rem;max-width:900px}
+.hero-title .accent{color:var(--yellow);text-shadow:0 0 40px rgba(255,205,17,0.3)}
+.hero-subtitle{font-size:clamp(0.95rem,2vw,1.15rem);color:var(--text-secondary);max-width:580px;margin-bottom:3rem;line-height:1.8}
+.hero-subtitle strong{color:#fff}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:4rem}
+.btn-primary{background:var(--yellow);color:#0A0A0A;font-weight:700;font-size:0.9rem;letter-spacing:1px;text-transform:uppercase;padding:0.9rem 2rem;border-radius:4px;cursor:pointer;transition:all var(--transition);display:inline-flex;align-items:center;gap:10px;border:none}
+.btn-primary:hover{background:#e6b800;transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,205,17,0.3)}
+.btn-outline{background:transparent;color:#fff;font-weight:600;font-size:0.9rem;letter-spacing:1px;text-transform:uppercase;padding:0.9rem 2rem;border-radius:4px;border:1px solid rgba(255,255,255,0.25);cursor:pointer;transition:all var(--transition);display:inline-flex;align-items:center;gap:10px}
+.btn-outline:hover{border-color:var(--yellow);color:var(--yellow);transform:translateY(-2px)}
+.hero-stats{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--border)}
+.hero-stat{padding:1.5rem 2.5rem;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:4px}
+.hero-stat:last-child{border-right:none}
+.hero-stat-value{font-family:"Bebas Neue",sans-serif;font-size:1.6rem;color:var(--yellow);letter-spacing:2px}
+.hero-stat-label{font-size:0.75rem;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1.5px}
+.ticker-section{background:var(--yellow);overflow:hidden;padding:0.85rem 0}
+.ticker-track{display:flex;width:max-content;animation:tickerScroll 25s linear infinite}
+.ticker-item{white-space:nowrap;font-family:"Bebas Neue",sans-serif;font-size:1.1rem;letter-spacing:4px;color:#0A0A0A;padding:0 2.5rem}
+@keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.section{padding:6rem 2rem}
+.section-inner{max-width:1200px;margin:0 auto}
+.section-label{font-size:0.75rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--yellow);margin-bottom:1rem}
+.section-title{font-family:"Bebas Neue",sans-serif;font-size:clamp(2rem,5vw,3.5rem);letter-spacing:3px;color:#fff;margin-bottom:1rem}
+.section-subtitle{font-size:1rem;color:var(--text-secondary);max-width:560px;line-height:1.8}
+#stats{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)}
+.stat-card{background:var(--card);padding:3rem 2.5rem;text-align:center;transition:background var(--transition)}
+.stat-card:hover{background:var(--card-elevated)}
+.stat-number{font-family:"Bebas Neue",sans-serif;font-size:clamp(2.5rem,5vw,4rem);color:var(--yellow);line-height:1;margin-bottom:0.5rem;letter-spacing:2px;text-shadow:0 0 30px rgba(255,205,17,0.2)}
+.stat-suffix{font-size:0.6em}
+.stat-label{font-size:0.85rem;color:var(--text-secondary);line-height:1.5;max-width:160px;margin:0 auto}
+#products{background:#0A0A0A}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
+.product-card{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--border);transition:transform 0.3s ease,border-color 0.3s ease,box-shadow 0.3s ease}
+.product-card:hover{transform:translateY(-6px);border-color:rgba(255,205,17,0.3);box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.product-card-bg{position:absolute;inset:0}
+.product-card-content{position:relative;z-index:2;padding:2.5rem}
+.product-icon{width:52px;height:52px;margin-bottom:1.5rem}
+.product-badge{display:inline-block;background:rgba(255,205,17,0.15);border:1px solid rgba(255,205,17,0.3);color:var(--yellow);font-size:0.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:0.25rem 0.75rem;border-radius:20px;margin-bottom:1rem}
+.product-title{font-family:"Bebas Neue",sans-serif;font-size:1.5rem;letter-spacing:2px;color:#fff;margin-bottom:0.5rem;line-height:1.2}
+.product-models{font-size:0.82rem;color:var(--text-secondary);line-height:1.6}
+.product-models strong{color:#fff;display:block;margin-bottom:3px}
+.product-card-1 .product-card-bg{background:linear-gradient(135deg,#0d1b2a,#1a2a3a 60%,#0d1b2a)}
+.product-card-2 .product-card-bg{background:linear-gradient(135deg,#1a1208,#2a1e0a 60%,#1a1208)}
+.product-card-3 .product-card-bg{background:linear-gradient(135deg,#0a1a0f,#132218 60%,#0a1a0f)}
+.product-card-4 .product-card-bg{background:linear-gradient(135deg,#130d1a,#1e1226 60%,#130d1a)}
+.product-card-5 .product-card-bg{background:linear-gradient(135deg,#1a0a0a,#2a0f0f 60%,#1a0a0a)}
+#models{background:var(--card)}
+.models-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
+.model-card{background:var(--card-elevated);border:1px solid var(--border);border-radius:10px;padding:2rem;transition:all 0.3s ease;position:relative;overflow:hidden}
+.model-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--yellow),var(--orange))}
+.model-card:hover{border-color:rgba(255,205,17,0.25);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.4)}
+.model-cat-label{font-size:0.7rem;font-weight:700;letter-spacing:3px;color:var(--yellow);text-transform:uppercase;margin-bottom:0.5rem}
+.model-number{font-family:"Bebas Neue",sans-serif;font-size:2.8rem;color:#fff;letter-spacing:3px;line-height:1;margin-bottom:0.5rem}
+.model-type{font-size:0.85rem;color:var(--text-secondary);margin-bottom:1.2rem}
+.model-spec{display:flex;align-items:center;gap:8px;font-size:0.85rem;color:#fff;font-weight:600;margin-bottom:0.4rem}
+.model-spec-icon{color:var(--yellow);flex-shrink:0}
+.model-underground::before{background:linear-gradient(90deg,#4a90e2,#2563eb)}
+.model-underground .model-cat-label{color:#60a5fa}
+.model-underground .model-spec-icon{color:#60a5fa}
+#why{background:#0A0A0A}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
+.why-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:2rem;transition:all 0.3s ease}
+.why-card:hover{border-color:rgba(255,205,17,0.2);background:var(--card-elevated);transform:translateY(-3px)}
+.why-icon{width:44px;height:44px;background:rgba(255,205,17,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem}
+.why-title{font-size:1rem;font-weight:700;color:#fff;margin-bottom:0.6rem}
+.why-text{font-size:0.85rem;color:var(--text-secondary);line-height:1.7}
+#process{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);margin-top:3.5rem;position:relative}
+.process-steps::before{content:"";position:absolute;top:36px;left:calc(12.5% + 1rem);right:calc(12.5% + 1rem);height:1px;background:linear-gradient(90deg,var(--yellow),var(--orange));z-index:0}
+.process-step{text-align:center;padding:0 1.5rem;position:relative;z-index:1}
+.step-number{width:72px;height:72px;border-radius:50%;background:var(--card-elevated);border:2px solid var(--yellow);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-family:"Bebas Neue",sans-serif;font-size:1.8rem;color:var(--yellow);box-shadow:0 0 25px rgba(255,205,17,0.15)}
+.step-title{font-family:"Bebas Neue",sans-serif;font-size:1.3rem;color:#fff;letter-spacing:2px;margin-bottom:0.5rem}
+.step-text{font-size:0.82rem;color:var(--text-secondary);line-height:1.6}
+#company{background:#0A0A0A}
+.company-card{background:var(--card);border:1px solid rgba(255,205,17,0.15);border-radius:12px;overflow:hidden;margin-top:3.5rem}
+.company-card-header{background:linear-gradient(135deg,#1a1500,#2a2000);border-bottom:1px solid rgba(255,205,17,0.15);padding:2rem 2.5rem;display:flex;align-items:center;gap:1.5rem}
+.company-seal{width:60px;height:60px;border-radius:50%;background:var(--yellow);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 20px rgba(255,205,17,0.3)}
+.company-seal span{font-family:"Bebas Neue",sans-serif;font-size:1.1rem;color:#0A0A0A;letter-spacing:1px}
+.company-header-info h2{font-family:"Bebas Neue",sans-serif;font-size:1.5rem;letter-spacing:2px;color:var(--yellow)}
+.company-header-info p{font-size:0.8rem;color:var(--text-secondary);margin-top:2px}
+.company-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.company-section{padding:2rem 2.5rem;border-right:1px solid var(--border)}
+.company-section:last-child{border-right:none}
+.company-section-title{font-size:0.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--yellow);margin-bottom:1.2rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border)}
+.company-row{display:flex;gap:1rem;margin-bottom:0.75rem;align-items:flex-start}
+.company-row-label{font-size:0.75rem;color:var(--text-secondary);min-width:130px;flex-shrink:0;padding-top:1px}
+.company-row-value{font-size:0.85rem;color:#fff;font-weight:500;line-height:1.5}
+.bank-block{background:var(--card-elevated);border:1px solid var(--border);border-radius:8px;padding:1.2rem;margin-bottom:1rem}
+.bank-name{font-size:0.75rem;font-weight:700;color:var(--yellow);margin-bottom:0.75rem;letter-spacing:1px;text-transform:uppercase}
+.bank-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;gap:1rem}
+.bank-row-label{font-size:0.72rem;color:var(--text-secondary);white-space:nowrap}
+.bank-row-value{font-size:0.78rem;color:#fff;font-weight:600}
+#contact{background:var(--card);border-top:1px solid var(--border)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3.5rem}
+.contact-info-item{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.8rem}
+.contact-icon-wrap{width:44px;height:44px;border-radius:8px;background:rgba(255,205,17,0.1);border:1px solid rgba(255,205,17,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-item-label{font-size:0.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text-secondary);margin-bottom:4px}
+.contact-item-value{font-size:0.92rem;color:#fff;line-height:1.7}
+.contact-item-value a{color:#fff;transition:color var(--transition)}
+.contact-item-value a:hover{color:var(--yellow)}
+.contact-form{display:flex;flex-direction:column;gap:1rem}
+.form-group{display:flex;flex-direction:column;gap:0.4rem}
+.form-label{font-size:0.75rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-secondary)}
+.form-input,.form-textarea{background:var(--card-elevated);border:1px solid var(--border);border-radius:6px;padding:0.85rem 1rem;color:#fff;font-size:0.9rem;transition:border-color var(--transition),box-shadow var(--transition);outline:none;width:100%}
+.form-input:focus,.form-textarea:focus{border-color:rgba(255,205,17,0.4);box-shadow:0 0 0 3px rgba(255,205,17,0.08)}
+.form-textarea{resize:vertical;min-height:110px}
+.form-submit{background:var(--yellow);color:#0A0A0A;font-weight:700;font-size:0.9rem;letter-spacing:1.5px;text-transform:uppercase;padding:0.95rem 2rem;border-radius:6px;cursor:pointer;transition:all var(--transition);border:none;margin-top:0.5rem;width:100%}
+.form-submit:hover{background:#e6b800;transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,205,17,0.25)}
+.form-success{display:none;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:8px;padding:1.5rem;text-align:center;color:#4ade80;font-weight:600}
+.form-success.visible{display:block}
+footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2rem}
+.footer-logo{font-family:"Bebas Neue",sans-serif;font-size:1.4rem;letter-spacing:3px;color:var(--yellow)}
+.footer-logo span{color:#fff}
+.footer-meta{font-size:0.78rem;color:var(--text-secondary);line-height:1.8;text-align:right}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:1024px){
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .products-grid{grid-template-columns:repeat(2,1fr)}
+  .models-grid{grid-template-columns:repeat(2,1fr)}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+  .process-steps{grid-template-columns:repeat(2,1fr);gap:2rem}
+  .process-steps::before{display:none}
+  .company-body{grid-template-columns:1fr}
+  .company-section{border-right:none;border-bottom:1px solid var(--border)}
+  .contact-grid{grid-template-columns:1fr;gap:3rem}
+  .footer-meta{text-align:left}
+}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .products-grid,.models-grid,.why-grid{grid-template-columns:1fr}
+  .process-steps{grid-template-columns:1fr;gap:1.5rem}
+  .section{padding:4rem 1.5rem}
+  .hero-stat{border-right:none;border-top:1px solid var(--border);padding:1rem 0}
+  .hero-stats{flex-direction:column}
+}
+@media(max-width:480px){
+  .hero-ctas{flex-direction:column}
+  .stats-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pl-logo"><span>ПЛ</span></div>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#products" onclick="closeMobileMenu()">Продукция</a></li>
+    <li><a href="#models" onclick="closeMobileMenu()">Модели</a></li>
+    <li><a href="#company" onclick="closeMobileMenu()">О нас</a></li>
+    <li><a href="#contact" onclick="closeMobileMenu()">Контакты</a></li>
+  </ul>
+  <a href="#contact" class="mobile-cta" onclick="closeMobileMenu()">Получить КП</a>
+</div>
+
+<!-- NAVIGATION -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Профит<span>Логистикс</span></a>
+  <ul class="nav-links">
+    <li><a href="#products">Продукция</a></li>
+    <li><a href="#models">Модели</a></li>
+    <li><a href="#company">О нас</a></li>
+    <li><a href="#contact">Контакты</a></li>
+  </ul>
+  <button class="nav-cta" onclick="scrollTo(0, document.getElementById(&quot;contact&quot;).offsetTop - 80)">Получить КП</button>
+  <button class="hamburger" id="hamburger" aria-label="Меню" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-dots"></div>
+  <div class="geo-shapes">
+    <div class="geo-shape"></div>
+    <div class="geo-shape"></div>
+    <div class="geo-shape"></div>
+    <div class="geo-shape"></div>
+    <div class="geo-shape"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      <span class="hero-badge-text">Производство &middot; Омск &middot; 2023</span>
+    </div>
+    <h1 class="hero-title">
+      ИЗГОТОВЛЕНИЕ <span class="accent">КУЗОВОВ</span><br>И КОВШЕЙ ДЛЯ<br><span class="accent">CATERPILLAR</span>
+    </h1>
+    <p class="hero-subtitle">
+      <strong>Производство под заказ</strong> &middot; Подземные и карьерные самосвалы<br>CAT AD30, AD45, 777E, 789D, 773E, 730C &middot; Ковши и ножи
+    </p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="document.getElementById(&quot;contact&quot;).scrollIntoView({behavior:&quot;smooth&quot;})">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+        Получить коммерческое предложение
+      </button>
+      <button class="btn-outline" onclick="document.getElementById(&quot;products&quot;).scrollIntoView({behavior:&quot;smooth&quot;})">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        Смотреть продукцию
+      </button>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="hero-stat-value">6+</span><span class="hero-stat-label">Моделей CAT</span></div>
+      <div class="hero-stat"><span class="hero-stat-value">500+</span><span class="hero-stat-label">Изделий</span></div>
+      <div class="hero-stat"><span class="hero-stat-value">100%</span><span class="hero-stat-label">Под заказ</span></div>
+      <div class="hero-stat"><span class="hero-stat-value">2023</span><span class="hero-stat-label">Год основания</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-section">
+  <div class="ticker-track">
+    <span class="ticker-item">CAT AD30 &middot; CAT AD45 &middot; CAT 777E &middot; CAT 789D &middot; CAT 773E &middot; CAT 730C &middot; CAT AD30 &middot; CAT AD45 &middot; CAT 777E &middot; CAT 789D &middot; CAT 773E &middot; CAT 730C &middot; CAT AD30 &middot; CAT AD45 &middot; CAT 777E &middot; CAT 789D &middot; CAT 773E &middot; CAT 730C &middot; CAT AD30 &middot; CAT AD45 &middot; CAT 777E &middot; CAT 789D &middot; CAT 773E &middot; CAT 730C &middot; CAT AD30 &middot; CAT AD45 &middot; CAT 777E &middot; CAT 789D &middot; CAT 773E &middot; CAT 730C &middot; CAT AD30 &middot; CAT AD45 &middot; CAT 777E &middot; CAT 789D &middot; CAT 773E &middot; CAT 730C &middot; </span>
+    <span class="ticker-item" aria-hidden="true">CAT AD30 &middot; CAT AD45 &middot; CAT 777E &middot; CAT 789D &middot; CAT 773E &middot; CAT 730C &middot; CAT AD30 &middot; CAT AD45 &middot; CAT 777E &middot; CAT 789D &middot; CAT 773E &middot; CAT 730C &middot; CAT AD30 &middot; CAT AD45 &middot; CAT 777E &middot; CAT 789D &middot; CAT 773E &middot; CAT 730C &middot; CAT AD30 &middot; CAT AD45 &middot; CAT 777E &middot; CAT 789D &middot; CAT 773E &middot; CAT 730C &middot; CAT AD30 &middot; CAT AD45 &middot; CAT 777E &middot; CAT 789D &middot; CAT 773E &middot; CAT 730C &middot; CAT AD30 &middot; CAT AD45 &middot; CAT 777E &middot; CAT 789D &middot; CAT 773E &middot; CAT 730C &middot; </span>
+  </div>
+</div>
+
+<!-- STATS SECTION -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-card reveal">
+      <div class="stat-number" data-target="6">0<span class="stat-suffix">+</span></div>
+      <div class="stat-label">Поддерживаемых<br>моделей CAT</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-number" data-target="500">0<span class="stat-suffix">+</span></div>
+      <div class="stat-label">Изготовленных<br>изделий</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-number">100<span class="stat-suffix">%</span></div>
+      <div class="stat-label">Изготовление<br>под заказ</div>
+    </div>
+    <div class="stat-card reveal">
+      <div class="stat-number">2023</div>
+      <div class="stat-label">Год<br>основания</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS SECTION -->
+<section id="products" class="section">
+  <div class="section-inner">
+    <p class="section-label reveal">Наша продукция</p>
+    <h2 class="section-title reveal">Изготавливаем под ваш заказ</h2>
+    <p class="section-subtitle reveal">Производим кузова, ковши и режущие элементы для техники CAT с точным соответствием заводским чертежам.</p>
+    <div class="products-grid">
+      <!-- Card 1 -->
+      <div class="product-card product-card-1 reveal">
+        <div class="product-card-bg"></div>
+        <div class="product-card-content">
+          <svg class="product-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="52" height="52" rx="8" fill="rgba(255,205,17,0.1)"/><path d="M8 34h36v4H8z" fill="none" stroke="#FFCD11" stroke-width="2" stroke-linecap="round"/><path d="M10 34V26l8-10h16l8 10v8" fill="none" stroke="#FFCD11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="38" r="4" fill="none" stroke="#FFCD11" stroke-width="2"/><circle cx="36" cy="38" r="4" fill="none" stroke="#FFCD11" stroke-width="2"/><path d="M18 26h16" stroke="#FFCD11" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="product-badge">Под заказ</span>
+          <h3 class="product-title">Кузова подземных<br>самосвалов</h3>
+          <div class="product-models">
+            <strong>Поддерживаемые модели:</strong>
+            CAT AD30 &middot; CAT AD45
+          </div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="product-card product-card-2 reveal">
+        <div class="product-card-bg"></div>
+        <div class="product-card-content">
+          <svg class="product-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="52" height="52" rx="8" fill="rgba(255,140,0,0.1)"/><path d="M6 36h40v4H6z" fill="none" stroke="#FF8C00" stroke-width="2" stroke-linecap="round"/><path d="M8 36V28h24l8-10h2v18" fill="none" stroke="#FF8C00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="40" r="4" fill="none" stroke="#FF8C00" stroke-width="2"/><circle cx="38" cy="40" r="4" fill="none" stroke="#FF8C00" stroke-width="2"/><path d="M8 28h16" stroke="#FF8C00" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="product-badge">Под заказ</span>
+          <h3 class="product-title">Кузова карьерных<br>самосвалов</h3>
+          <div class="product-models">
+            <strong>Поддерживаемые модели:</strong>
+            CAT 777E &middot; CAT 789D &middot; CAT 773E &middot; CAT 730C
+          </div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="product-card product-card-3 reveal">
+        <div class="product-card-bg"></div>
+        <div class="product-card-content">
+          <svg class="product-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="52" height="52" rx="8" fill="rgba(34,197,94,0.1)"/><path d="M10 38h32" stroke="#4ade80" stroke-width="2" stroke-linecap="round"/><path d="M12 38V20l8-8h12l8 8v18" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 38V28h12v10" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 12v8" stroke="#4ade80" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="product-badge">Под заказ</span>
+          <h3 class="product-title">Ковши для экскаваторов<br>и погрузчиков</h3>
+          <div class="product-models">
+            <strong>Любая модель:</strong>
+            Изготавливаем ковши под любую марку и модель техники
+          </div>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="product-card product-card-4 reveal">
+        <div class="product-card-bg"></div>
+        <div class="product-card-content">
+          <svg class="product-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="52" height="52" rx="8" fill="rgba(168,85,247,0.1)"/><path d="M6 40h40M8 40V24h12v-8h12v8h12v16" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="44" r="4" fill="none" stroke="#a855f7" stroke-width="2"/><circle cx="38" cy="44" r="4" fill="none" stroke="#a855f7" stroke-width="2"/><path d="M20 32h12" stroke="#a855f7" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="product-badge">Под заказ</span>
+          <h3 class="product-title">Шахтные<br>погрузчики</h3>
+          <div class="product-models">
+            <strong>Любая модель:</strong>
+            Изготавливаем компоненты для шахтных погрузчиков любой марки
+          </div>
+        </div>
+      </div>
+      <!-- Card 5 -->
+      <div class="product-card product-card-5 reveal">
+        <div class="product-card-bg"></div>
+        <div class="product-card-content">
+          <svg class="product-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="52" height="52" rx="8" fill="rgba(239,68,68,0.1)"/><rect x="8" y="28" width="36" height="8" rx="2" fill="none" stroke="#ef4444" stroke-width="2"/><path d="M10 28L18 16h16l8 12" fill="none" stroke="#ef4444" stroke-width="2" stroke-linejoin="round"/><path d="M8 36l4 8h28l4-8" fill="none" stroke="#ef4444" stroke-width="2" stroke-linejoin="round"/><path d="M20 28v8M26 28v8M32 28v8" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="product-badge">Под заказ</span>
+          <h3 class="product-title">Ножи и режущие<br>кромки</h3>
+          <div class="product-models">
+            <strong>Назначение:</strong>
+            Режущие кромки и ножи для ковшей любой конфигурации
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODELS SECTION -->
+<section id="models" class="section">
+  <div class="section-inner">
+    <p class="section-label reveal">Поддерживаемые модели</p>
+    <h2 class="section-title reveal">Техника CAT</h2>
+    <p class="section-subtitle reveal">Специализируемся на производстве кузовов для следующих моделей карьерной и подземной техники Caterpillar.</p>
+    <div class="models-grid">
+      <div class="model-card model-underground reveal">
+        <p class="model-cat-label">CATERPILLAR</p>
+        <p class="model-number">CAT AD30</p>
+        <p class="model-type">Подземный самосвал</p>
+        <div class="model-spec"><span class="model-spec-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 100 6 3 3 0 000-6z"/><path d="M5 22V10a7 7 0 0114 0v12"/></svg></span>30 т грузоподъёмность</div>
+        <div class="model-spec"><span class="model-spec-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 100 6 3 3 0 000-6z"/><path d="M5 22V10a7 7 0 0114 0v12"/></svg></span>Шарнирная рама</div>
+      </div>
+      <div class="model-card model-underground reveal">
+        <p class="model-cat-label">CATERPILLAR</p>
+        <p class="model-number">CAT AD45</p>
+        <p class="model-type">Подземный самосвал</p>
+        <div class="model-spec"><span class="model-spec-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 100 6 3 3 0 000-6z"/><path d="M5 22V10a7 7 0 0114 0v12"/></svg></span>45 т грузоподъёмность</div>
+        <div class="model-spec"><span class="model-spec-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 100 6 3 3 0 000-6z"/><path d="M5 22V10a7 7 0 0114 0v12"/></svg></span>Шарнирная рама</div>
+      </div>
+      <div class="model-card reveal">
+        <p class="model-cat-label">CATERPILLAR</p>
+        <p class="model-number">CAT 777E</p>
+        <p class="model-type">Карьерный самосвал</p>
+        <div class="model-spec"><span class="model-spec-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 100 6 3 3 0 000-6z"/><path d="M5 22V10a7 7 0 0114 0v12"/></svg></span>100 т грузоподъёмность</div>
+        <div class="model-spec"><span class="model-spec-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 100 6 3 3 0 000-6z"/><path d="M5 22V10a7 7 0 0114 0v12"/></svg></span>Жёсткая рама</div>
+      </div>
+      <div class="model-card reveal">
+        <p class="model-cat-label">CATERPILLAR</p>
+        <p class="model-number">CAT 789D</p>
+        <p class="model-type">Карьерный самосвал</p>
+        <div class="model-spec"><span class="model-spec-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 100 6 3 3 0 000-6z"/><path d="M5 22V10a7 7 0 0114 0v12"/></svg></span>177 т грузоподъёмность</div>
+        <div class="model-spec"><span class="model-spec-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 100 6 3 3 0 000-6z"/><path d="M5 22V10a7 7 0 0114 0v12"/></svg></span>Жёсткая рама</div>
+      </div>
+      <div class="model-card reveal">
+        <p class="model-cat-label">CATERPILLAR</p>
+        <p class="model-number">CAT 773E</p>
+        <p class="model-type">Карьерный самосвал</p>
+        <div class="model-spec"><span class="model-spec-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 100 6 3 3 0 000-6z"/><path d="M5 22V10a7 7 0 0114 0v12"/></svg></span>55 т грузоподъёмность</div>
+        <div class="model-spec"><span class="model-spec-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 100 6 3 3 0 000-6z"/><path d="M5 22V10a7 7 0 0114 0v12"/></svg></span>Жёсткая рама</div>
+      </div>
+      <div class="model-card reveal">
+        <p class="model-cat-label">CATERPILLAR</p>
+        <p class="model-number">CAT 730C</p>
+        <p class="model-type">Сочленённый самосвал</p>
+        <div class="model-spec"><span class="model-spec-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 100 6 3 3 0 000-6z"/><path d="M5 22V10a7 7 0 0114 0v12"/></svg></span>28 т грузоподъёмность</div>
+        <div class="model-spec"><span class="model-spec-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 100 6 3 3 0 000-6z"/><path d="M5 22V10a7 7 0 0114 0v12"/></svg></span>Шарнирная рама</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US SECTION -->
+<section id="why" class="section">
+  <div class="section-inner">
+    <p class="section-label reveal">Почему мы</p>
+    <h2 class="section-title reveal">Наши преимущества</h2>
+    <p class="section-subtitle reveal">Работаем напрямую с промышленными предприятиями и горнодобывающими компаниями по всей России.</p>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div>
+        <h3 class="why-title">Собственное производство</h3>
+        <p class="why-text">Полный цикл производства на собственном оборудовании без посредников</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
+        <h3 class="why-title">Изготовление под заказ</h3>
+        <p class="why-text">Производим только под конкретный заказ с учётом ваших параметров и требований</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <h3 class="why-title">Точные размеры по чертежам</h3>
+        <p class="why-text">Строгое соответствие заводским чертежам и техническим документам CAT</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>
+        <h3 class="why-title">Высококачественная сталь</h3>
+        <p class="why-text">Используем высокопрочные марки стали, соответствующие требованиям горного оборудования</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h3 class="why-title">Опытные специалисты</h3>
+        <p class="why-text">Команда с многолетним опытом производства оборудования для горной промышленности</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+        <h3 class="why-title">Гибкие условия оплаты</h3>
+        <p class="why-text">Индивидуальный подход к каждому клиенту, рассрочка и постоплата по договорённости</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS SECTION -->
+<section id="process" class="section">
+  <div class="section-inner">
+    <p class="section-label reveal">Как мы работаем</p>
+    <h2 class="section-title reveal">Процесс сотрудничества</h2>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-number">01</div>
+        <h3 class="step-title">Заявка</h3>
+        <p class="step-text">Оставьте заявку на сайте или позвоните нам &mdash; обсудим ваши потребности</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-number">02</div>
+        <h3 class="step-title">Расчёт</h3>
+        <p class="step-text">Рассчитаем стоимость по вашим параметрам и выставим коммерческое предложение</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-number">03</div>
+        <h3 class="step-title">Производство</h3>
+        <p class="step-text">Изготовим изделие точно по чертежам в оговорённые сроки</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-number">04</div>
+        <h3 class="step-title">Доставка</h3>
+        <p class="step-text">Доставим готовое изделие в любую точку России</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANY CARD SECTION -->
+<section id="company" class="section">
+  <div class="section-inner">
+    <p class="section-label reveal">Реквизиты</p>
+    <h2 class="section-title reveal">Карточка предприятия</h2>
+    <div class="company-card reveal">
+      <div class="company-card-header">
+        <div class="company-seal"><span>ПЛ</span></div>
+        <div class="company-header-info">
+          <h2>ООО «ПРОФИТЛОГИСТИКС»</h2>
+          <p>Общество с ограниченной ответственностью &mdash; официальные реквизиты</p>
+        </div>
+      </div>
+      <div class="company-body">
+        <div class="company-section">
+          <p class="company-section-title">Общие сведения</p>
+          <div class="company-row"><span class="company-row-label">Полное наименование</span><span class="company-row-value">Общество с ограниченной ответственностью «ПРОФИТЛОГИСТИКС»</span></div>
+          <div class="company-row"><span class="company-row-label">Краткое название</span><span class="company-row-value">ООО «ПРОФИТЛОГИСТИКС»</span></div>
+          <div class="company-row"><span class="company-row-label">ОГРН</span><span class="company-row-value">1235500004321</span></div>
+          <div class="company-row"><span class="company-row-label">ИНН / КПП</span><span class="company-row-value">5507293145 / 550701001</span></div>
+          <div class="company-row"><span class="company-row-label">Юридический адрес</span><span class="company-row-value">644015, Омская область, г. Омск, ул. 22 Декабря д.108 помещение 204</span></div>
+          <div class="company-row"><span class="company-row-label">Руководитель</span><span class="company-row-value">Кваша Владимир Сергеевич</span></div>
+          <div class="company-row"><span class="company-row-label">Гл. бухгалтер</span><span class="company-row-value">Кваша Кристина Николаевна</span></div>
+          <div class="company-row"><span class="company-row-label">Email</span><span class="company-row-value"><a href="mailto:Profit_logistics@mail.ru" style="color:var(--yellow)">Profit_logistics@mail.ru</a></span></div>
+        </div>
+        <div class="company-section">
+          <p class="company-section-title">Банковские реквизиты</p>
+          <div class="bank-block">
+            <p class="bank-name">АО «Альфа-Банк»</p>
+            <div class="bank-row"><span class="bank-row-label">Расчётный счёт</span><span class="bank-row-value">40702810923050015180</span></div>
+            <div class="bank-row"><span class="bank-row-label">БИК</span><span class="bank-row-value">045004774</span></div>
+            <div class="bank-row"><span class="bank-row-label">Корр. счёт</span><span class="bank-row-value">30101810600000000774</span></div>
+          </div>
+          <div class="bank-block">
+            <p class="bank-name">Банк ВТБ (ПАО)</p>
+            <div class="bank-row"><span class="bank-row-label">Расчётный счёт</span><span class="bank-row-value">40702810813210002188</span></div>
+            <div class="bank-row"><span class="bank-row-label">БИК</span><span class="bank-row-value">044525411</span></div>
+            <div class="bank-row"><span class="bank-row-label">Корр. счёт</span><span class="bank-row-value">30101810145250000411</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="section">
+  <div class="section-inner">
+    <p class="section-label reveal">Контакты</p>
+    <h2 class="section-title reveal">Свяжитесь с нами</h2>
+    <p class="section-subtitle reveal">Оставьте заявку или позвоните &mdash; рассчитаем стоимость и сроки под ваш проект.</p>
+    <div class="contact-grid">
+      <!-- LEFT: Contact Info -->
+      <div class="reveal">
+        <div class="contact-info-item">
+          <div class="contact-icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          </div>
+          <div>
+            <p class="contact-item-label">Телефоны</p>
+            <div class="contact-item-value">
+              <a href="tel:+79503383384">+7 (950) 338-338-4</a><br>
+              <a href="tel:+79139698093">+7 (913) 969-80-93</a><br>
+              <a href="tel:+79533970044">+7 (953) 397-00-44</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <p class="contact-item-label">Email</p>
+            <div class="contact-item-value"><a href="mailto:Profit_logistics@mail.ru">Profit_logistics@mail.ru</a></div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <p class="contact-item-label">Адрес</p>
+            <div class="contact-item-value">644015, Омская область, г. Омск,<br>ул. 22 Декабря д.108 помещение 204</div>
+          </div>
+        </div>
+      </div>
+      <!-- RIGHT: Form -->
+      <div class="reveal">
+        <form class="contact-form" id="contactForm" onsubmit="handleFormSubmit(event)">
+          <div class="form-group">
+            <label class="form-label" for="formName">Ваше имя</label>
+            <input class="form-input" type="text" id="formName" name="name" placeholder="Иван Иванов" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="formPhone">Телефон</label>
+            <input class="form-input" type="tel" id="formPhone" name="phone" placeholder="+7 (___) ___-__-__" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="formMessage">Сообщение</label>
+            <textarea class="form-textarea" id="formMessage" name="message" placeholder="Опишите ваш запрос: модель техники, количество, требования..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Отправить заявку</button>
+          <div class="form-success" id="formSuccess">
+            Заявка отправлена! Мы свяжемся с вами в ближайшее время.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Профит<span>Логистикс</span></div>
+      <p style="font-size:0.78rem;color:var(--text-secondary);margin-top:0.5rem">ООО «ПРОФИТЛОГИСТИКС»</p>
+    </div>
+    <div class="footer-meta">
+      <p>&copy; 2025 ООО «ПРОФИТЛОГИСТИКС». Все права защищены.</p>
+      <p>ОГРН 1235500004321 &middot; ИНН 5507293145</p>
+      <p>644015, Омская область, г. Омск, ул. 22 Декабря д.108</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// === PRELOADER ===
+window.addEventListener("load", function() {
+  setTimeout(function() {
+    var pl = document.getElementById("preloader");
+    if (pl) { pl.classList.add("hidden"); }
+  }, 1500);
+});
+
+// === STICKY NAV ===
+window.addEventListener("scroll", function() {
+  var nav = document.getElementById("nav");
+  if (window.scrollY > 40) {
+    nav.classList.add("scrolled");
+  } else {
+    nav.classList.remove("scrolled");
+  }
+});
+
+// === MOBILE MENU ===
+function toggleMobileMenu() {
+  var menu = document.getElementById("mobileMenu");
+  var burger = document.getElementById("hamburger");
+  menu.classList.toggle("open");
+  burger.classList.toggle("open");
+}
+function closeMobileMenu() {
+  var menu = document.getElementById("mobileMenu");
+  var burger = document.getElementById("hamburger");
+  menu.classList.remove("open");
+  burger.classList.remove("open");
+}
+
+// === SMOOTH SCROLL ===
+document.querySelectorAll("a[href^='#']").forEach(function(a) {
+  a.addEventListener("click", function(e) {
+    var href = this.getAttribute("href");
+    if (href === "#") return;
+    var target = document.querySelector(href);
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+});
+// === INTERSECTION OBSERVER (SCROLL REVEAL) ===
+var revealElements = document.querySelectorAll(".reveal");
+var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (prefersReduced) {
+  revealElements.forEach(function(el) { el.classList.add("visible"); });
+} else {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+  revealElements.forEach(function(el) { observer.observe(el); });
+}
+
+// === COUNTER ANIMATION ===
+function animateCounter(el, target, duration) {
+  if (prefersReduced) { el.textContent = target + el.querySelector(".stat-suffix") ? "" : ""; return; }
+  var suffix = el.querySelector(".stat-suffix") ? el.querySelector(".stat-suffix").outerHTML : "";
+  var start = 0;
+  var startTime = null;
+  function step(ts) {
+    if (!startTime) startTime = ts;
+    var progress = Math.min((ts - startTime) / duration, 1);
+    var current = Math.floor(progress * target);
+    el.innerHTML = current + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+var counterObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      var el = entry.target;
+      var target = parseInt(el.getAttribute("data-target"));
+      if (target) animateCounter(el, target, 1800);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll("[data-target]").forEach(function(el) { counterObserver.observe(el); });
+
+// === FORM HANDLER ===
+function handleFormSubmit(e) {
+  e.preventDefault();
+  var btn = document.querySelector(".form-submit");
+  var success = document.getElementById("formSuccess");
+  btn.textContent = "Отправка...";
+  btn.disabled = true;
+  setTimeout(function() {
+    e.target.style.display = "none";
+    success.classList.add("visible");
+  }, 1200);
+}
+
+// === TICKER PAUSE ON HOVER ===
+var ticker = document.querySelector(".ticker-track");
+if (ticker) {
+  ticker.addEventListener("mouseenter", function() { ticker.style.animationPlayState = "paused"; });
+  ticker.addEventListener("mouseleave", function() { ticker.style.animationPlayState = "running"; });
+}
+</script>
+</body>
+</html>

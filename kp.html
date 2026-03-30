@@ -15,7 +15,12 @@ body { font-family: Inter, sans-serif; background: #c8c8c8; }
 @media print { body { background: #fff; margin: 0; } .no-print { display: none !important; } .page { margin: 0; box-shadow: none; } }
 .save-btn { font-family: Bebas Neue, sans-serif;  position: fixed; top: 20px; right: 20px; z-index: 1000; background: #FFCD11; color: #0A0A0A; border: none; padding: 13px 28px; font-size: 17px; letter-spacing: 2px; cursor: pointer; border-radius: 4px; font-weight: 700; }
 .save-btn:hover { background: #e6b800; }
-.page-cover { background: #0A0A0A; }
+.page-cover { background: #0A0A0A; position: relative; overflow: hidden; }
+.cover-photo-bg { position: absolute; inset: 0; background-size: cover; background-position: center 40%; opacity: 0; transition: opacity 1.2s ease; z-index: 0; }
+.cover-photo-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.78) 45%, rgba(10,10,10,0.92) 100%); z-index: 1; }
+@media print { .cover-photo-bg { display: none; } .cover-photo-overlay { display: none; } }
+@keyframes coverKenBurns { 0%{transform:scale(1) translate(0,0)} 50%{transform:scale(1.07) translate(-1%,-0.5%)} 100%{transform:scale(1.04) translate(0.5%,1%)} }
+.cover-photo-bg.loaded { opacity: 1; animation: coverKenBurns 20s ease-in-out infinite alternate; transform-origin: center center; }
 .dot-grid { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle, rgba(255,205,17,0.13) 1px, transparent 1px); background-size: 18px 18px; pointer-events: none; z-index: 1; }
 .cv-stripe { position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: linear-gradient(to bottom, #FFCD11, rgba(255,205,17,0.2), #FFCD11); z-index: 5; }
 .cv-d1 { position: absolute; top: -60px; right: -80px; width: 340px; height: 460px; background: rgba(255,205,17,0.05); transform: rotate(22deg); border-left: 3px solid rgba(255,205,17,0.22); z-index: 2; }
@@ -129,6 +134,8 @@ body { font-family: Inter, sans-serif; background: #c8c8c8; }
 <button class="save-btn no-print" onclick="window.print()">СОХРАНИТЬ PDF</button>
 <!-- PAGE 1 COVER -->
 <div class="page page-cover">
+  <div class="cover-photo-bg" id="coverPhotoBg"></div>
+  <div class="cover-photo-overlay"></div>
   <div class="dot-grid"></div>
   <div class="cv-stripe"></div>
   <div class="cv-d1"></div>
@@ -423,5 +430,24 @@ body { font-family: Inter, sans-serif; background: #c8c8c8; }
     <div class="ftr-n">05 / 05</div>
   </div>
 </div>
+<script>
+// Cover page photo
+var coverBg = document.getElementById('coverPhotoBg');
+if (coverBg) {
+  var img = new Image();
+  img.onload = function() {
+    coverBg.style.backgroundImage = 'url(' + img.src + ')';
+    coverBg.classList.add('loaded');
+  };
+  img.src = 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=85';
+}
+// Auto-set current date
+var dateEl = document.querySelector('.cv-date-val');
+if (dateEl) {
+  var months = ['ЯНВАРЬ','ФЕВРАЛЬ','МАРТ','АПРЕЛЬ','МАЙ','ИЮНЬ','ИЮЛЬ','АВГУСТ','СЕНТЯБРЬ','ОКТЯБРЬ','НОЯБРЬ','ДЕКАБРЬ'];
+  var d = new Date();
+  dateEl.textContent = months[d.getMonth()] + ' ' + d.getFullYear() + ' Г.';
+}
+</script>
 </body>
 </html>

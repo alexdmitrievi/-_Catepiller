@@ -19,6 +19,8 @@ input,textarea{font-family:inherit}
   --border:rgba(255,255,255,0.08);--transition:200ms ease;
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+@keyframes kenBurns{0%{transform:scale(1) translate(0,0)}33%{transform:scale(1.06) translate(-1.5%,-1%)}66%{transform:scale(1.1) translate(1%,-0.5%)}100%{transform:scale(1.05) translate(0.5%,1%)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-track{background:#111}
 ::-webkit-scrollbar-thumb{background:var(--yellow);border-radius:3px}
@@ -48,7 +50,7 @@ input,textarea{font-family:inherit}
 .mobile-menu a:hover{color:var(--yellow)}
 .mobile-cta{display:inline-block;background:var(--yellow);color:#0A0A0A;font-weight:700;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;padding:0.75rem 1.8rem;border-radius:4px;margin-top:1rem;cursor:pointer}
 #hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding:120px 2rem 80px}
-#hero::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,10,0.92) 0%,rgba(10,10,10,0.75) 50%,rgba(10,10,10,0.88) 100%);z-index:1;pointer-events:none}
+#hero::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,10,0.94) 0%,rgba(10,10,10,0.65) 50%,rgba(10,10,10,0.85) 100%),radial-gradient(ellipse at 80% 50%,rgba(255,205,17,0.04) 0%,transparent 60%);z-index:1;pointer-events:none}
 .hero-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,205,17,0.08) 1px,transparent 1px);background-size:32px 32px;z-index:2}
 .geo-shapes{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:2}
 .geo-shape{position:absolute;background:linear-gradient(135deg,rgba(255,205,17,0.06),rgba(255,140,0,0.04));border:1px solid rgba(255,205,17,0.12);animation:geoFloat 8s ease-in-out infinite}
@@ -227,6 +229,36 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
   .hero-stat{border-right:1px solid var(--border);border-top:1px solid var(--border);padding:0.85rem 1rem;}
   .hero-stat:nth-child(2n){border-right:none;}
 }
+/* Product card photo layers */
+.product-card-photo{position:absolute;inset:0;background:linear-gradient(90deg,#1a1a1a 25%,#2a2a2a 50%,#1a1a1a 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;opacity:0;transition:transform 8s ease,opacity 1s ease;z-index:0;}
+.product-card.photo-loaded .product-card-photo{background:none;animation:none;opacity:1;}
+.product-card:hover .product-card-photo{transform:scale(1.06);}
+.product-card-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.75) 60%,rgba(0,0,0,0.9) 100%);z-index:1;}
+/* Why Us parallax bg */
+#why{position:relative;overflow:hidden;}
+.why-parallax-bg{position:absolute;inset:-20%;background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80');background-size:cover;background-position:center;opacity:0.06;filter:grayscale(100%);z-index:0;transform:translateY(0);transition:transform 0.1s linear;}
+.why-grid{position:relative;z-index:1;}
+/* Gallery section */
+.gallery-section{background:#0A0A0A;}
+.gallery-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:240px 240px;gap:12px;margin-top:3rem;}
+.gallery-item-large{grid-row:1/3;}
+.gallery-item{position:relative;border-radius:8px;overflow:hidden;background:#111;cursor:pointer;opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.gallery-item.visible{opacity:1;transform:translateY(0);}
+.gallery-item:nth-child(2){transition-delay:0.1s;}
+.gallery-item:nth-child(3){transition-delay:0.2s;}
+.gallery-item:nth-child(4){transition-delay:0.3s;}
+.gallery-img{width:100%;height:100%;background-size:cover;background-position:center;background-color:#1a1a1a;transition:transform 0.6s ease;}
+.gallery-item:hover .gallery-img{transform:scale(1.05);}
+.gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:2rem 1.2rem 1.2rem;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,transparent 100%);transform:translateY(100%);transition:transform 0.3s ease;}
+.gallery-item:hover .gallery-caption{transform:translateY(0);}
+.gallery-caption span{font-size:0.82rem;font-weight:600;color:var(--yellow);letter-spacing:1.5px;text-transform:uppercase;}
+@media(max-width:768px){
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:180px 180px 180px;}
+  .gallery-item-large{grid-row:auto;}
+}
+@media(max-width:480px){
+  .gallery-grid{grid-template-columns:1fr;grid-template-rows:220px 180px 180px 180px;}
+}
 </style>
 </head>
 <body>
@@ -272,7 +304,7 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
     <div class="geo-shape"></div>
     <div class="geo-shape"></div>
   </div>
-  <div class="hero-image-bg" id="heroBg" style="position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;z-index:0;opacity:0;transition:opacity 1.2s ease;"></div>
+  <div style="position:absolute;inset:0;overflow:hidden;z-index:0;"><div id="heroBg" style="position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;opacity:0;transition:opacity 1.2s ease;transform-origin:center center;"></div></div>
   <div class="hero-content">
     <div class="hero-badge">
       <span class="hero-badge-dot"></span>
@@ -343,6 +375,8 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
       <!-- Card 1 -->
       <div class="product-card product-card-1 reveal">
         <div class="product-card-bg"></div>
+        <div class="product-card-photo" id="product-card-1-photo"></div>
+        <div class="product-card-overlay"></div>
         <div class="product-card-content">
           <svg class="product-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="52" height="52" rx="8" fill="rgba(255,205,17,0.1)"/><path d="M8 34h36v4H8z" fill="none" stroke="#FFCD11" stroke-width="2" stroke-linecap="round"/><path d="M10 34V26l8-10h16l8 10v8" fill="none" stroke="#FFCD11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="38" r="4" fill="none" stroke="#FFCD11" stroke-width="2"/><circle cx="36" cy="38" r="4" fill="none" stroke="#FFCD11" stroke-width="2"/><path d="M18 26h16" stroke="#FFCD11" stroke-width="2" stroke-linecap="round"/></svg>
           <span class="product-badge">Под заказ</span>
@@ -356,6 +390,8 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
       <!-- Card 2 -->
       <div class="product-card product-card-2 reveal">
         <div class="product-card-bg"></div>
+        <div class="product-card-photo" id="product-card-2-photo"></div>
+        <div class="product-card-overlay"></div>
         <div class="product-card-content">
           <svg class="product-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="52" height="52" rx="8" fill="rgba(255,140,0,0.1)"/><path d="M6 36h40v4H6z" fill="none" stroke="#FF8C00" stroke-width="2" stroke-linecap="round"/><path d="M8 36V28h24l8-10h2v18" fill="none" stroke="#FF8C00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="40" r="4" fill="none" stroke="#FF8C00" stroke-width="2"/><circle cx="38" cy="40" r="4" fill="none" stroke="#FF8C00" stroke-width="2"/><path d="M8 28h16" stroke="#FF8C00" stroke-width="2" stroke-linecap="round"/></svg>
           <span class="product-badge">Под заказ</span>
@@ -369,6 +405,8 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
       <!-- Card 3 -->
       <div class="product-card product-card-3 reveal">
         <div class="product-card-bg"></div>
+        <div class="product-card-photo" id="product-card-3-photo"></div>
+        <div class="product-card-overlay"></div>
         <div class="product-card-content">
           <svg class="product-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="52" height="52" rx="8" fill="rgba(34,197,94,0.1)"/><path d="M10 38h32" stroke="#4ade80" stroke-width="2" stroke-linecap="round"/><path d="M12 38V20l8-8h12l8 8v18" fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 38V28h12v10" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 12v8" stroke="#4ade80" stroke-width="2" stroke-linecap="round"/></svg>
           <span class="product-badge">Под заказ</span>
@@ -382,6 +420,8 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
       <!-- Card 4 -->
       <div class="product-card product-card-4 reveal">
         <div class="product-card-bg"></div>
+        <div class="product-card-photo" id="product-card-4-photo"></div>
+        <div class="product-card-overlay"></div>
         <div class="product-card-content">
           <svg class="product-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="52" height="52" rx="8" fill="rgba(168,85,247,0.1)"/><path d="M6 40h40M8 40V24h12v-8h12v8h12v16" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="44" r="4" fill="none" stroke="#a855f7" stroke-width="2"/><circle cx="38" cy="44" r="4" fill="none" stroke="#a855f7" stroke-width="2"/><path d="M20 32h12" stroke="#a855f7" stroke-width="2" stroke-linecap="round"/></svg>
           <span class="product-badge">Под заказ</span>
@@ -395,6 +435,8 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
       <!-- Card 5 -->
       <div class="product-card product-card-5 reveal">
         <div class="product-card-bg"></div>
+        <div class="product-card-photo" id="product-card-5-photo"></div>
+        <div class="product-card-overlay"></div>
         <div class="product-card-content">
           <svg class="product-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="52" height="52" rx="8" fill="rgba(239,68,68,0.1)"/><rect x="8" y="28" width="36" height="8" rx="2" fill="none" stroke="#ef4444" stroke-width="2"/><path d="M10 28L18 16h16l8 12" fill="none" stroke="#ef4444" stroke-width="2" stroke-linejoin="round"/><path d="M8 36l4 8h28l4-8" fill="none" stroke="#ef4444" stroke-width="2" stroke-linejoin="round"/><path d="M20 28v8M26 28v8M32 28v8" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/></svg>
           <span class="product-badge">Под заказ</span>
@@ -464,7 +506,8 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
 
 <!-- WHY US SECTION -->
 <section id="why" class="section">
-  <div class="section-inner">
+  <div class="why-parallax-bg" id="whyParallaxBg"></div>
+  <div class="section-inner" style="position:relative;z-index:1;">
     <p class="section-label reveal">Почему мы</p>
     <h2 class="section-title reveal">Наши преимущества</h2>
     <p class="section-subtitle reveal">Работаем напрямую с промышленными предприятиями и горнодобывающими компаниями по всей России.</p>
@@ -498,6 +541,33 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
         <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
         <h3 class="why-title">Гибкие условия оплаты</h3>
         <p class="why-text">Индивидуальный подход к каждому клиенту, рассрочка и постоплата по договорённости</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY SECTION -->
+<section id="gallery" class="section gallery-section">
+  <div class="section-inner">
+    <p class="section-label reveal">Производство</p>
+    <h2 class="section-title reveal">Наше производство</h2>
+    <p class="section-subtitle reveal">Современное оборудование, высококачественная сталь, строгий контроль качества на каждом этапе.</p>
+    <div class="gallery-grid">
+      <div class="gallery-item gallery-item-large reveal" id="gal-1">
+        <div class="gallery-img" id="gal-img-1"></div>
+        <div class="gallery-caption"><span>Сварочные работы</span></div>
+      </div>
+      <div class="gallery-item reveal" id="gal-2">
+        <div class="gallery-img" id="gal-img-2"></div>
+        <div class="gallery-caption"><span>Металлообработка</span></div>
+      </div>
+      <div class="gallery-item reveal" id="gal-3">
+        <div class="gallery-img" id="gal-img-3"></div>
+        <div class="gallery-caption"><span>Карьерные самосвалы CAT</span></div>
+      </div>
+      <div class="gallery-item reveal" id="gal-4">
+        <div class="gallery-img" id="gal-img-4"></div>
+        <div class="gallery-caption"><span>Горная техника</span></div>
       </div>
     </div>
   </div>
@@ -818,12 +888,65 @@ if (ticker) {
   ticker.addEventListener("mouseleave", function() { ticker.style.animationPlayState = "running"; });
 }
 
-// Hero background image (Unsplash mining equipment)
+// Hero background image with Ken Burns
 var heroBg = document.getElementById('heroBg');
 if(heroBg){
   var img = new Image();
-  img.onload = function(){ heroBg.style.backgroundImage='url('+img.src+')'; heroBg.style.opacity='1'; };
+  img.onload = function(){
+    heroBg.style.backgroundImage='url('+img.src+')';
+    heroBg.style.opacity='1';
+    if(!prefersReduced){
+      heroBg.style.animation='kenBurns 22s ease-in-out infinite alternate';
+      heroBg.style.transformOrigin='center center';
+    }
+  };
   img.src = 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80';
+}
+
+// Product card photo loading with shimmer
+var cardPhotos = [
+  { id: 'product-card-1-photo', url: 'https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?w=800&q=80' },
+  { id: 'product-card-2-photo', url: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80' },
+  { id: 'product-card-3-photo', url: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80' },
+  { id: 'product-card-4-photo', url: 'https://images.unsplash.com/photo-1573167205775-b5ca06e12e0b?w=800&q=80' },
+  { id: 'product-card-5-photo', url: 'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=800&q=80' }
+];
+cardPhotos.forEach(function(p) {
+  var el = document.getElementById(p.id);
+  if (!el) return;
+  var img = new Image();
+  img.onload = function() {
+    el.style.backgroundImage = 'url(' + img.src + ')';
+    el.closest('.product-card').classList.add('photo-loaded');
+  };
+  img.src = p.url;
+});
+
+// Gallery photo loading
+var galleryPhotos = [
+  { id: 'gal-img-1', url: 'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=900&q=80' },
+  { id: 'gal-img-2', url: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&q=80' },
+  { id: 'gal-img-3', url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80' },
+  { id: 'gal-img-4', url: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80' }
+];
+galleryPhotos.forEach(function(p) {
+  var el = document.getElementById(p.id);
+  if (!el) return;
+  var img = new Image();
+  img.onload = function() { el.style.backgroundImage = 'url(' + img.src + ')'; };
+  img.src = p.url;
+});
+
+// Why Us parallax
+var whyBg = document.querySelector('.why-parallax-bg');
+if (whyBg && !prefersReduced) {
+  window.addEventListener('scroll', function() {
+    var whySection = document.getElementById('why');
+    if (!whySection) return;
+    var rect = whySection.getBoundingClientRect();
+    var offset = rect.top * 0.2;
+    whyBg.style.transform = 'translateY(' + offset + 'px)';
+  }, { passive: true });
 }
 
 // Show float buttons after scrolling past hero

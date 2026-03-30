@@ -233,22 +233,17 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
 .product-card-photo{position:absolute;inset:0;background:linear-gradient(90deg,#1a1a1a 25%,#2a2a2a 50%,#1a1a1a 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;opacity:0;transition:transform 8s ease,opacity 1s ease;z-index:0;}
 .product-card.photo-loaded .product-card-photo{background:none;animation:none;opacity:1;}
 .product-card:hover .product-card-photo{transform:scale(1.06);}
-/* CAT-branded placeholder for underground models without available photos */
+/* CAT-branded placeholder — SVG data URI with "CAT" watermark */
 .product-card.cat-placeholder .product-card-photo{
-  background:linear-gradient(135deg,#090f18 0%,#0d1b2a 40%,#111 100%);
+  background-color:#0d1b2a;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%230d1b2a'/%3E%3Crect x='0' y='0' width='5' height='300' fill='%23FFCD11' opacity='0.5'/%3E%3Ctext x='200' y='165' font-family='Arial Black%2Csans-serif' font-size='96' font-weight='900' fill='%23FFCD11' opacity='0.13' text-anchor='middle' letter-spacing='12'%3ECAT%3C%2Ftext%3E%3Crect x='120' y='185' width='160' height='2' fill='%23FFCD11' opacity='0.18'/%3E%3C%2Fsvg%3E");
+  background-size:cover;background-position:center;
   animation:none;opacity:1;
-}
-.product-card.cat-placeholder .product-card-photo::after{
-  content:"CAT";
-  position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  font-family:"Bebas Neue",sans-serif;font-size:6rem;
-  color:rgba(255,205,17,0.12);letter-spacing:14px;pointer-events:none;
 }
 .product-card-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.75) 60%,rgba(0,0,0,0.9) 100%);z-index:1;}
 /* Why Us parallax bg */
 #why{position:relative;overflow:hidden;}
-.why-parallax-bg{position:absolute;inset:-20%;background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Caterpillar_777F_dump_truck.jpg/1920px-Caterpillar_777F_dump_truck.jpg');background-size:cover;background-position:center;opacity:0.06;filter:grayscale(100%);z-index:0;transform:translateY(0);transition:transform 0.1s linear;}
+.why-parallax-bg{position:absolute;inset:-20%;background-image:url('https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/Caterpillar_777F_dump_truck.jpg&width=1920');background-size:cover;background-position:center;opacity:0.06;filter:grayscale(100%);z-index:0;transform:translateY(0);transition:transform 0.1s linear;}
 .why-grid{position:relative;z-index:1;}
 /* Gallery section */
 .gallery-section{background:#0A0A0A;}
@@ -567,19 +562,19 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
     <div class="gallery-grid">
       <div class="gallery-item gallery-item-large reveal" id="gal-1">
         <div class="gallery-img" id="gal-img-1"></div>
-        <div class="gallery-caption"><span>Сварочные работы</span></div>
+        <div class="gallery-caption"><span>CAT 777F — карьерный самосвал</span></div>
       </div>
       <div class="gallery-item reveal" id="gal-2">
         <div class="gallery-img" id="gal-img-2"></div>
-        <div class="gallery-caption"><span>Металлообработка</span></div>
+        <div class="gallery-caption"><span>Сварка стальных конструкций</span></div>
       </div>
       <div class="gallery-item reveal" id="gal-3">
         <div class="gallery-img" id="gal-img-3"></div>
-        <div class="gallery-caption"><span>Карьерные самосвалы CAT</span></div>
+        <div class="gallery-caption"><span>CAT 789C — горный самосвал 177 т</span></div>
       </div>
       <div class="gallery-item reveal" id="gal-4">
         <div class="gallery-img" id="gal-img-4"></div>
-        <div class="gallery-caption"><span>Горная техника</span></div>
+        <div class="gallery-caption"><span>Ковш CAT 330B — изготавливаем аналог</span></div>
       </div>
     </div>
   </div>
@@ -912,7 +907,7 @@ if(heroBg){
       heroBg.style.transformOrigin='center center';
     }
   };
-  img.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Caterpillar_777F_dump_truck.jpg/1920px-Caterpillar_777F_dump_truck.jpg';
+  img.src = 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/Caterpillar_777F_dump_truck.jpg&width=1920';
 }
 
 // Product card photo loading — real CAT equipment from Wikimedia Commons
@@ -920,10 +915,10 @@ if(heroBg){
 var cardPhotos = [
   // Card 1: CAT AD30/AD45 underground trucks — placeholder with CAT branding
   { id: 'product-card-1-photo', url: null },
-  // Card 2: CAT 777E/789D/773E/730C open-pit trucks — Wikimedia Commons photo
-  { id: 'product-card-2-photo', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Caterpillar_777F_dump_truck.jpg/800px-Caterpillar_777F_dump_truck.jpg' },
-  // Card 3: Buckets — CAT 966G wheel loader (Wikimedia Commons)
-  { id: 'product-card-3-photo', url: 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/Caterpillar_966G_loader.JPEG&width=800' },
+  // Card 2: CAT 777E/789D/773E/730C open-pit trucks — CAT 777F (Wikimedia Commons)
+  { id: 'product-card-2-photo', url: 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/Caterpillar_777F_dump_truck.jpg&width=800' },
+  // Card 3: Buckets — CAT 330B excavator bucket & arm (Wikimedia Commons)
+  { id: 'product-card-3-photo', url: 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/Caterpillar_330B_Hydraulic_Excavator_bucket_and_arm_-_Hillsboro,_Oregon.JPG&width=800' },
   // Card 4: Underground loaders — placeholder with CAT branding
   { id: 'product-card-4-photo', url: null },
   // Card 5: Cutting edges — CAT 789C mining truck (Wikimedia Commons)
@@ -947,16 +942,16 @@ cardPhotos.forEach(function(p) {
   img.src = p.url;
 });
 
-// Gallery photo loading — real CAT equipment + manufacturing
+// Gallery photo loading — real CAT equipment + manufacturing (all Wikimedia Commons)
 var galleryPhotos = [
-  // Large featured: CAT 777F open-pit dump truck (Wikimedia Commons)
-  { id: 'gal-img-1', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Caterpillar_777F_dump_truck.jpg/1200px-Caterpillar_777F_dump_truck.jpg' },
-  // Welding sparks — manufacturing process (Unsplash, confirmed loading)
-  { id: 'gal-img-2', url: 'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=600&q=80' },
+  // Large featured: CAT 777F open-pit dump truck — Special:Redirect (reliable)
+  { id: 'gal-img-1', url: 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/Caterpillar_777F_dump_truck.jpg&width=1200' },
+  // Welding Steel Plate — manufacturing process (Wikimedia Commons)
+  { id: 'gal-img-2', url: 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/Welding_Steel_Plate.JPG&width=600' },
   // CAT 789C mining haul truck (Wikimedia Commons)
   { id: 'gal-img-3', url: 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/Caterpillar_789C_-2.jpg&width=600' },
-  // CAT 797 mining truck — open pit scene (Wikimedia Commons)
-  { id: 'gal-img-4', url: 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/Caterpillar_797_Truck.jpg&width=600' }
+  // CAT 330B excavator bucket — relevant for bucket manufacturing (Wikimedia Commons)
+  { id: 'gal-img-4', url: 'https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/Caterpillar_330B_Hydraulic_Excavator_bucket_and_arm_-_Hillsboro,_Oregon.JPG&width=600' }
 ];
 galleryPhotos.forEach(function(p) {
   var el = document.getElementById(p.id);

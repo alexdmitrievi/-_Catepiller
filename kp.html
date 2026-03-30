@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Коммерческое предложение — ООО ПрофитЛогистикс</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@page { size: A4; margin: 0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Inter, sans-serif; background: #c8c8c8; }
+.page { width: 210mm; min-height: 297mm; position: relative; overflow: hidden; page-break-after: always; margin: 0 auto 20px auto; display: flex; flex-direction: column; }
+@media print { body { background: #fff; margin: 0; } .no-print { display: none !important; } .page { margin: 0; box-shadow: none; } }
+.save-btn { font-family: Bebas Neue, sans-serif;  position: fixed; top: 20px; right: 20px; z-index: 1000; background: #FFCD11; color: #0A0A0A; border: none; padding: 13px 28px; font-size: 17px; letter-spacing: 2px; cursor: pointer; border-radius: 4px; font-weight: 700; }
+.save-btn:hover { background: #e6b800; }
+.page-cover { background: #0A0A0A; }
+.dot-grid { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(circle, rgba(255,205,17,0.13) 1px, transparent 1px); background-size: 18px 18px; pointer-events: none; z-index: 1; }
+.cv-stripe { position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: linear-gradient(to bottom, #FFCD11, rgba(255,205,17,0.2), #FFCD11); z-index: 5; }
+.cv-d1 { position: absolute; top: -60px; right: -80px; width: 340px; height: 460px; background: rgba(255,205,17,0.05); transform: rotate(22deg); border-left: 3px solid rgba(255,205,17,0.22); z-index: 2; }
+.cv-d2 { position: absolute; top: 40px; right: 30px; width: 160px; height: 260px; background: rgba(255,205,17,0.03); transform: rotate(22deg); border-left: 2px solid rgba(255,205,17,0.12); z-index: 2; }
+.cv-d3 { position: absolute; bottom: -100px; left: -60px; width: 420px; height: 320px; background: rgba(255,205,17,0.04); transform: rotate(-18deg); border-top: 3px solid rgba(255,205,17,0.18); z-index: 2; }
+.cv-d4 { position: absolute; bottom: 40px; left: 20px; width: 220px; height: 140px; background: rgba(255,205,17,0.03); transform: rotate(-18deg); border-top: 2px solid rgba(255,205,17,0.1); z-index: 2; }
+.cv-corner-tl { position: absolute; top: 0; left: 0; width: 90px; height: 90px; border-top: 2px solid rgba(255,205,17,0.35); border-left: 2px solid rgba(255,205,17,0.35); z-index: 3; }
+.cv-corner-br { position: absolute; bottom: 0; right: 0; width: 90px; height: 90px; border-bottom: 2px solid rgba(255,205,17,0.35); border-right: 2px solid rgba(255,205,17,0.35); z-index: 3; }
+.cv-hdr { position: relative; z-index: 10; padding: 34px 48px 0 52px; display: flex; align-items: center; gap: 18px; }
+.logo-c { width: 54px; height: 54px; border: 3px solid #FFCD11; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255,205,17,0.1); flex-shrink: 0; }
+.ll { font-size: 20px; color: #FFCD11; letter-spacing: 1px; font-weight: 700; }
+.logo-tx { display: flex; flex-direction: column; }
+.co-s { font-family: Bebas Neue, sans-serif;  font-size: 23px; color: #FFCD11; letter-spacing: 4px; font-weight: 700; }
+.co-t { font-size: 9px; color: rgba(255,255,255,0.4); letter-spacing: 2px; text-transform: uppercase; margin-top: 1px; }
+.cv-main { position: relative; z-index: 10; padding: 0 52px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.cv-eyebrow { font-size: 10px; color: #FFCD11; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 22px; display: flex; align-items: center; gap: 14px; }
+.cv-eyebrow::before { content: ""; width: 44px; height: 2px; background: #FFCD11; }
+.cv-h1 { font-family: Bebas Neue, sans-serif;  font-size: 78px; color: #fff; line-height: 0.88; letter-spacing: 3px; margin-bottom: 30px; font-weight: 700; }
+.cv-h1 .y { color: #FFCD11; }
+.cv-sub { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.65; max-width: 390px; border-left: 4px solid #FFCD11; padding-left: 18px; font-weight: 300; }
+.cv-ftr { position: relative; z-index: 10; padding: 22px 52px 32px 52px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: space-between; }
+.cv-date-lbl { font-size: 9px; color: rgba(255,255,255,0.35); letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 3px; }
+.cv-date-val { font-family: Bebas Neue, sans-serif;  font-size: 17px; color: #FFCD11; letter-spacing: 4px; font-weight: 700; }
+.cv-line { flex: 1; height: 1px; background: linear-gradient(to right, rgba(255,205,17,0.4), transparent); margin: 0 28px; }
+.cv-seal { width: 74px; height: 74px; border: 2px solid #FFCD11; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255,205,17,0.07); }
+.s-pl { font-family: Bebas Neue, sans-serif;  font-size: 24px; color: #FFCD11; letter-spacing: 2px; line-height: 1; font-weight: 700; }
+.s-tx { font-size: 5px; color: rgba(255,205,17,0.6); letter-spacing: 0.8px; text-align: center; text-transform: uppercase; line-height: 1.4; margin-top: 2px; }
+.page-doc { background: #f5f5f0; }
+.doc-hdr { background: #0A0A0A; padding: 19px 40px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+.doc-hdr-l { display: flex; align-items: center; gap: 14px; }
+.hdr-logo { width: 32px; height: 32px; border: 2px solid #FFCD11; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255,205,17,0.1); }
+.hl { font-size: 11px; color: #FFCD11; font-weight: 700; }
+.hdr-t { font-family: Bebas Neue, sans-serif;  font-size: 27px; color: #fff; letter-spacing: 4px; font-weight: 700; line-height: 1; }
+.hdr-acc { width: 34px; height: 3px; background: #FFCD11; margin-top: 3px; }
+.doc-hdr-r { font-size: 9px; color: rgba(255,255,255,0.3); letter-spacing: 1.5px; text-transform: uppercase; text-align: right; line-height: 1.6; }
+.doc-body { padding: 24px 40px; flex: 1; }
+.page-ftr { background: #0A0A0A; padding: 12px 40px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+.ftr-co { font-size: 9px; color: rgba(255,255,255,0.3); letter-spacing: 2px; text-transform: uppercase; }
+.ftr-n { font-family: Bebas Neue, sans-serif;  font-size: 15px; color: #FFCD11; letter-spacing: 3px; font-weight: 700; }
+.prod-row { background: #fff; border-radius: 6px; margin-bottom: 10px; padding: 14px 16px 14px 0; display: flex; align-items: flex-start; border-left: 4px solid #FFCD11; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.prod-n { font-family: Bebas Neue, sans-serif;  font-size: 42px; color: rgba(255,205,17,0.18); line-height: 1; min-width: 64px; text-align: center; padding-top: 2px; flex-shrink: 0; font-weight: 700; }
+.prod-b { flex: 1; }
+.prod-ti { font-size: 13.5px; font-weight: 700; color: #0A0A0A; margin-bottom: 3px; line-height: 1.3; }
+.prod-mo { font-size: 10px; color: #FFCD11; font-weight: 700; letter-spacing: 1.2px; margin-bottom: 5px; text-transform: uppercase; }
+.prod-de { font-size: 11px; color: #555; line-height: 1.6; font-weight: 300; }
+.badge { background: #FFCD11; color: #0A0A0A; font-size: 8.5px; font-weight: 700; letter-spacing: 2px; padding: 4px 9px; border-radius: 2px; text-transform: uppercase; white-space: nowrap; align-self: flex-start; margin-left: 12px; margin-top: 2px; flex-shrink: 0; }
+.intro-t { font-size: 12px; color: #444; line-height: 1.7; margin-bottom: 20px; font-weight: 300; border-left: 3px solid #FFCD11; padding: 11px 14px; background: rgba(255,205,17,0.05); border-radius: 0 4px 4px 0; }
+.mdl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 20px; }
+.mc-hdr { font-family: Bebas Neue, sans-serif;  font-size: 16px; color: #0A0A0A; letter-spacing: 2px; margin-bottom: 10px; padding-bottom: 7px; border-bottom: 2px solid #FFCD11; font-weight: 700; text-transform: uppercase; }
+.mc { background: #fff; border-radius: 6px; padding: 12px 15px; margin-bottom: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 13px; border-left: 3px solid #FFCD11; }
+.mc-n { font-family: Bebas Neue, sans-serif;  font-size: 27px; color: #FFCD11; line-height: 1; min-width: 70px; font-weight: 700; }
+.mc-ty { font-size: 9px; color: #888; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2px; }
+.mc-pl { font-size: 13px; font-weight: 700; color: #0A0A0A; }
+.mc-pl span { font-weight: 300; font-size: 11px; color: #666; }
+.also-bx { background: #0A0A0A; border-radius: 6px; padding: 17px 22px; display: flex; align-items: center; gap: 18px; }
+.also-l { font-family: Bebas Neue, sans-serif;  font-size: 11px; color: #FFCD11; letter-spacing: 3px; white-space: nowrap; font-weight: 700; text-transform: uppercase; }
+.also-ts { display: flex; flex-wrap: wrap; gap: 7px; }
+.also-t { background: rgba(255,205,17,0.12); color: #FFCD11; font-size: 10.5px; font-weight: 700; padding: 5px 11px; border-radius: 3px; letter-spacing: 1px; border: 1px solid rgba(255,205,17,0.3); }
+.why-g { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.why-c { background: #fff; border-radius: 6px; padding: 15px 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-top: 3px solid #FFCD11; }
+.why-ic { width: 32px; height: 32px; background: rgba(255,205,17,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 9px; }
+.why-ic svg { width: 15px; height: 15px; }
+.why-ct { font-size: 11.5px; font-weight: 700; color: #0A0A0A; margin-bottom: 5px; line-height: 1.3; }
+.why-cd { font-size: 10.5px; color: #666; line-height: 1.55; font-weight: 300; }
+.cond-hdr2 { font-family: Bebas Neue, sans-serif;  font-size: 22px; color: #0A0A0A; letter-spacing: 3px; margin-bottom: 11px; font-weight: 700; text-transform: uppercase; }
+.cond-hdr2 span { color: #FFCD11; }
+.ct2 { width: 100%; border-collapse: collapse; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.ct2 td { padding: 10px 15px; font-size: 11.5px; color: #333; border-bottom: 1px solid #e8e8e0; }
+.ct2 tr:last-child td { border-bottom: none; }
+.ct2 td:first-child { font-weight: 700; color: #0A0A0A; width: 40%; border-left: 4px solid #FFCD11; background: #fff; }
+.ct2 tr:nth-child(odd) td:last-child { background: #fafaf5; }
+.ct2 tr:nth-child(even) td:last-child { background: #f3f3ee; }
+.ct2 tr:nth-child(even) td:first-child { background: #fafaf5; }
+.ct-top { background: #0A0A0A; padding: 32px 40px 26px 40px; flex-shrink: 0; }
+.ct-ti { font-family: Bebas Neue, sans-serif;  font-size: 32px; color: #fff; letter-spacing: 4px; font-weight: 700; margin-bottom: 5px; }
+.ct-ti span { color: #FFCD11; }
+.ct-div { width: 52px; height: 3px; background: #FFCD11; margin-bottom: 24px; }
+.ct-gr { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin-bottom: 20px; }
+.ct-ico { width: 36px; height: 36px; background: rgba(255,205,17,0.1); border-radius: 50%; border: 1px solid rgba(255,205,17,0.28); display: flex; align-items: center; justify-content: center; margin-bottom: 9px; }
+.ct-ico svg { width: 16px; height: 16px; }
+.ct-lbl { font-size: 8.5px; color: rgba(255,255,255,0.38); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
+.ct-val { font-size: 12px; color: #fff; font-weight: 500; line-height: 1.7; }
+.ct-val a { color: #FFCD11; text-decoration: none; }
+.dr-row { display: inline-flex; align-items: center; gap: 14px; padding: 12px 18px; background: rgba(255,205,17,0.08); border-radius: 6px; border: 1px solid rgba(255,205,17,0.2); }
+.dr-ico { width: 34px; height: 34px; border: 2px solid #FFCD11; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255,205,17,0.1); flex-shrink: 0; }
+.dr-ico svg { width: 15px; height: 15px; }
+.dr-l { font-size: 8.5px; color: rgba(255,255,255,0.38); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2px; }
+.dr-n { font-size: 13px; color: #fff; font-weight: 700; }
+.req-s { padding: 24px 40px; background: #f5f5f0; flex: 1; }
+.req-ti { font-family: Bebas Neue, sans-serif;  font-size: 22px; color: #0A0A0A; letter-spacing: 3px; font-weight: 700; margin-bottom: 4px; text-transform: uppercase; }
+.req-ti span { color: #FFCD11; }
+.req-dv { width: 46px; height: 3px; background: #FFCD11; margin-bottom: 14px; }
+.rmt { width: 100%; border-collapse: collapse; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.rmt td { padding: 7.5px 13px; font-size: 10.5px; color: #333; border-bottom: 1px solid #e0e0d8; }
+.rmt tr:last-child td { border-bottom: none; }
+.rmt td:first-child { font-weight: 700; color: #0A0A0A; width: 35%; border-left: 3px solid #FFCD11; background: #fff; }
+.rmt tr:nth-child(even) td:last-child { background: #f0f0ea; }
+.rmt tr:nth-child(odd) td:last-child { background: #fafaf5; }
+.rmt tr:nth-child(even) td:first-child { background: #fafaf5; }
+.bk-row { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+.bk-c { background: #fff; border-radius: 6px; padding: 14px 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-top: 3px solid #FFCD11; }
+.bk-n { font-size: 12.5px; font-weight: 700; color: #0A0A0A; margin-bottom: 9px; display: flex; align-items: center; gap: 7px; }
+.bk-r { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; padding-bottom: 3px; border-bottom: 1px solid #f0f0e8; }
+.bk-r:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.bkk { font-size: 9.5px; color: #888; font-weight: 500; }
+.bkv { font-size: 9.5px; color: #0A0A0A; font-weight: 700; }
+.bk-n::before { content: ""; width: 7px; height: 7px; background: #FFCD11; border-radius: 50%; }
+</style>
+</head>
+<body>
+<button class="save-btn no-print" onclick="window.print()">СОХРАНИТЬ PDF</button>
+<!-- PAGE 1 COVER -->
+<div class="page page-cover">
+  <div class="dot-grid"></div>
+  <div class="cv-stripe"></div>
+  <div class="cv-d1"></div>
+  <div class="cv-d2"></div>
+  <div class="cv-d3"></div>
+  <div class="cv-d4"></div>
+  <div class="cv-corner-tl"></div>
+  <div class="cv-corner-br"></div>
+  <div class="cv-hdr">
+    <div class="logo-c"><span class="ll">ПЛ</span></div>
+    <div class="logo-tx">
+      <span class="co-s">ПрофитЛогистикс</span>
+      <span class="co-t">Промышленная техника &amp; компоненты</span>
+    </div>
+  </div>
+  <div class="cv-main">
+    <div class="cv-eyebrow">ООО &laquo;ПрофитЛогистикс&raquo;</div>
+    <div class="cv-h1">КОММЕР<span class="y">ЧЕС</span><br>КОЕ ПРЕД<span class="y">ЛО</span><br>ЖЕНИЕ</div>
+    <div class="cv-sub">Изготовление кузовов, ковшей и режущих элементов для горной и карьерной техники Caterpillar</div>
+  </div>
+  <div class="cv-ftr">
+    <div>
+      <div class="cv-date-lbl">Дата составления</div>
+      <div class="cv-date-val">МАРТ 2025 Г.</div>
+    </div>
+    <div class="cv-line"></div>
+    <div class="cv-seal">
+      <div class="s-pl">ПЛ</div>
+      <div class="s-tx">Профит<br>Логистикс</div>
+    </div>
+  </div>
+</div>
+<!-- PAGE 2 PRODUCTS -->
+<div class="page page-doc">
+  <div class="doc-hdr">
+    <div class="doc-hdr-l">
+      <div class="hdr-logo"><span class="hl">ПЛ</span></div>
+      <div>
+        <div class="hdr-t">НАША ПРОДУКЦИЯ</div>
+        <div class="hdr-acc"></div>
+      </div>
+    </div>
+    <div class="doc-hdr-r">ООО &laquo;ПрофитЛогистикс&raquo;<br>КП — 2025</div>
+  </div>
+  <div class="doc-body">
+    <div class="prod-row">
+      <div class="prod-n">01</div>
+      <div class="prod-b">
+        <div class="prod-ti">Кузова для подземных самосвалов CAT AD30 и CAT AD45</div>
+        <div class="prod-mo">CAT AD30 / CAT AD45</div>
+        <div class="prod-de">Изготавливаем кузова для подземных самосвалов Caterpillar. Точные размеры по чертежам заказчика, высококачественная сталь. Оптимальная геометрия для работы в горных выработках.</div>
+      </div>
+      <div class="badge">ПОД ЗАКАЗ</div>
+    </div>
+    <div class="prod-row">
+      <div class="prod-n">02</div>
+      <div class="prod-b">
+        <div class="prod-ti">Кузова для карьерных самосвалов CAT 777E, 789D, 773E, 730C</div>
+        <div class="prod-mo">CAT 777E / 789D / 773E / 730C</div>
+        <div class="prod-de">Производство сменных и основных кузовов для карьерных самосвалов. Износостойкие материалы, усиленные борта и днище. Полное соответствие техническим требованиям.</div>
+      </div>
+      <div class="badge">ПОД ЗАКАЗ</div>
+    </div>
+    <div class="prod-row">
+      <div class="prod-n">03</div>
+      <div class="prod-b">
+        <div class="prod-ti">Ковши для экскаваторов и погрузчиков</div>
+        <div class="prod-mo">Любая модель экскаватора / погрузчика</div>
+        <div class="prod-de">Изготовление ковшей для карьерной и горной техники. Тип ковша, объём и конфигурация — по вашим требованиям. Усиленные режущие кромки и зубья в комплекте.</div>
+      </div>
+      <div class="badge">ПОД ЗАКАЗ</div>
+    </div>
+    <div class="prod-row">
+      <div class="prod-n">04</div>
+      <div class="prod-b">
+        <div class="prod-ti">Компоненты для шахтных погрузчиков</div>
+        <div class="prod-mo">Любая модель шахтного погрузчика</div>
+        <div class="prod-de">Поставка и изготовление компонентов для шахтных погрузчиков: ковши, рабочее оборудование, несущие элементы конструкции. Работаем по чертежам заказчика.</div>
+      </div>
+      <div class="badge">ПОД ЗАКАЗ</div>
+    </div>
+    <div class="prod-row">
+      <div class="prod-n">05</div>
+      <div class="prod-b">
+        <div class="prod-ti">Ножи и режущие кромки для ковшей</div>
+        <div class="prod-mo">Универсальные / под любую модель</div>
+        <div class="prod-de">Изготовление износостойких ножей и режущих кромок для ковшей экскаваторов и погрузчиков. Увеличенный ресурс работы за счёт применения высококачественной стали.</div>
+      </div>
+      <div class="badge">ПОД ЗАКАЗ</div>
+    </div>
+  </div>
+  <div class="page-ftr">
+    <div class="ftr-co">ООО &laquo;ПрофитЛогистикс&raquo; — Profit_logistics@mail.ru</div>
+    <div class="ftr-n">02 / 05</div>
+  </div>
+</div>
+<!-- PAGE 3 MODELS -->
+<div class="page page-doc">
+  <div class="doc-hdr">
+    <div class="doc-hdr-l">
+      <div class="hdr-logo"><span class="hl">ПЛ</span></div>
+      <div>
+        <div class="hdr-t">ПОДДЕРЖИВАЕМЫЕ МОДЕЛИ</div>
+        <div class="hdr-acc"></div>
+      </div>
+    </div>
+    <div class="doc-hdr-r">Техника CAT<br>Кузова и ковши</div>
+  </div>
+  <div class="doc-body">
+    <div class="intro-t">Мы специализируемся на изготовлении кузовов для подземных и карьерных самосвалов Caterpillar. Ниже представлены основные модели, для которых мы производим продукцию. Не нашли свою модель? Свяжитесь с нами — мы работаем с любыми техническими заданиями.</div>
+    <div class="mdl-grid">
+      <div>
+        <div class="mc-hdr">Подземные самосвалы</div>
+        <div class="mc">
+          <div class="mc-n">CAT AD30</div>
+          <div>
+            <div class="mc-ty">Подземный самосвал</div>
+            <div class="mc-pl">Грузоподъёмность: 30 тонн</div>
+          </div>
+        </div>
+        <div class="mc">
+          <div class="mc-n">CAT AD45</div>
+          <div>
+            <div class="mc-ty">Подземный самосвал</div>
+            <div class="mc-pl">Грузоподъёмность: 45 тонн</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="mc-hdr">Карьерные самосвалы</div>
+        <div class="mc">
+          <div class="mc-n">CAT 777E</div>
+          <div>
+            <div class="mc-ty">Карьерный самосвал</div>
+            <div class="mc-pl">Грузоподъёмность: 100 тонн</div>
+          </div>
+        </div>
+        <div class="mc">
+          <div class="mc-n">CAT 789D</div>
+          <div>
+            <div class="mc-ty">Карьерный самосвал</div>
+            <div class="mc-pl">Грузоподъёмность: 177 тонн</div>
+          </div>
+        </div>
+        <div class="mc">
+          <div class="mc-n">CAT 773E</div>
+          <div>
+            <div class="mc-ty">Карьерный самосвал</div>
+            <div class="mc-pl">Грузоподъёмность: 55 тонн</div>
+          </div>
+        </div>
+        <div class="mc">
+          <div class="mc-n">CAT 730C</div>
+          <div>
+            <div class="mc-ty">Шарнирно-сочленённый самосвал</div>
+            <div class="mc-pl">Грузоподъёмность: 28 тонн</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="also-bx">
+      <div class="also-l">ТАКЖЕ ИЗГОТАВЛИВАЕМ</div>
+      <div class="also-ts">
+        <span class="also-t">Ковши для экскаваторов</span>
+        <span class="also-t">Ковши для погрузчиков</span>
+        <span class="also-t">Режущие кромки</span>
+        <span class="also-t">Ножи для ковшей</span>
+        <span class="also-t">Компоненты шахтных погрузчиков</span>
+      </div>
+    </div>
+  </div>
+  <div class="page-ftr">
+    <div class="ftr-co">ООО &laquo;ПрофитЛогистикс&raquo;</div>
+    <div class="ftr-n">03 / 05</div>
+  </div>
+</div>
+<!-- PAGE 4 WHY US -->
+<div class="page page-doc">
+  <div class="doc-hdr">
+    <div class="doc-hdr-l">
+      <div class="hdr-logo"><span class="hl">ПЛ</span></div>
+      <div>
+        <div class="hdr-t">ПОЧЕМУ МЫ</div>
+        <div class="hdr-acc"></div>
+      </div>
+    </div>
+    <div class="doc-hdr-r">Наши преимущества<br>Условия работы</div>
+  </div>
+  <div class="doc-body">
+    <div class="why-g">
+      <div class="why-c">
+        <div class="why-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#FFCD11" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <div class="why-ct">Собственное производство</div>
+        <div class="why-cd">Кузова и ковши изготавливаются на нашем производственном цеху. Полный контроль качества на каждом этапе.</div>
+      </div>
+      <div class="why-c">
+        <div class="why-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#FFCD11" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <div class="why-ct">Точность по чертежам</div>
+        <div class="why-cd">Изготавливаем строго по предоставленным техническим данным и чертежам заказчика без отступлений.</div>
+      </div>
+      <div class="why-c">
+        <div class="why-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#FFCD11" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <div class="why-ct">Высококачественная сталь</div>
+        <div class="why-cd">Используем износостойкую сталь, предназначенную специально для горнодобывающей отрасли.</div>
+      </div>
+      <div class="why-c">
+        <div class="why-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#FFCD11" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></div>
+        <div class="why-ct">Полный цикл производства</div>
+        <div class="why-cd">От расчёта и проектирования до готового изделия без посредников и лишних затрат.</div>
+      </div>
+      <div class="why-c">
+        <div class="why-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#FFCD11" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <div class="why-ct">Доставка по всей России</div>
+        <div class="why-cd">Организуем доставку транспортной компанией в любую точку страны. Возможен самовывоз.</div>
+      </div>
+      <div class="why-c">
+        <div class="why-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#FFCD11" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="why-ct">Гибкие условия</div>
+        <div class="why-cd">Аванс + постоплата по результату. Работаем с крупными добывающими предприятиями.</div>
+      </div>
+    </div>
+    <div class="cond-hdr2">УСЛОВИЯ <span>РАБОТЫ</span></div>
+    <table class="ct2">
+      <tr><td>Форма изготовления</td><td>Под заказ, по чертежам и техническим данным заказчика</td></tr>
+      <tr><td>Материал</td><td>Высококачественная износостойкая сталь (марка по согласованию)</td></tr>
+      <tr><td>Срок изготовления</td><td>По согласованию с заказчиком, зависит от объёма и сложности</td></tr>
+      <tr><td>Условия оплаты</td><td>Аванс + остаток при готовности изделия</td></tr>
+      <tr><td>Доставка</td><td>Транспортная компания за счёт заказчика / самовывоз</td></tr>
+    </table>
+  </div>
+  <div class="page-ftr">
+    <div class="ftr-co">ООО &laquo;ПрофитЛогистикс&raquo;</div>
+    <div class="ftr-n">04 / 05</div>
+  </div>
+</div>
+<!-- PAGE 5 CONTACTS -->
+<div class="page page-doc" style="background:#0A0A0A;">
+  <div class="ct-top">
+    <div class="ct-ti">СВЯЖИТЕСЬ <span>С НАМИ</span></div>
+    <div class="ct-div"></div>
+    <div class="ct-gr">
+      <div class="ct-bl">
+        <div class="ct-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#FFCD11" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9A16 16 0 0 0 15 16.09l1.27-.84a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div class="ct-lbl">Телефоны</div>
+        <div class="ct-val">+7 (950) 338-338-4<br>+7 (913) 969-80-93<br>+7 (953) 397-00-44</div>
+      </div>
+      <div class="ct-bl">
+        <div class="ct-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#FFCD11" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div class="ct-lbl">Электронная почта</div>
+        <div class="ct-val"><a href="mailto:Profit_logistics@mail.ru">Profit_logistics@mail.ru</a></div>
+      </div>
+      <div class="ct-bl">
+        <div class="ct-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#FFCD11" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="ct-lbl">Юридический адрес</div>
+        <div class="ct-val">644015, г. Омск,<br>ул. 22 Декабря, д.108,<br>помещение 204</div>
+      </div>
+    </div>
+    <div class="dr-row">
+      <div class="dr-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#FFCD11" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+      <div><div class="dr-l">Генеральный директор</div><div class="dr-n">Кваша Владимир Сергеевич</div></div>
+    </div>
+  </div>
+  <div class="req-s">
+    <div class="req-ti">БАНКОВСКИЕ <span>РЕКВИЗИТЫ</span></div>
+    <div class="req-dv"></div>
+    <table class="rmt">
+      <tr><td>Полное наименование</td><td>Общество с ограниченной ответственностью &laquo;ПРОФИТЛОГИСТИКС&raquo;</td></tr>
+      <tr><td>Краткое наименование</td><td>ООО &laquo;ПРОФИТЛОГИСТИКС&raquo;</td></tr>
+      <tr><td>ОГРН</td><td>1235500004321</td></tr>
+      <tr><td>ИНН / КПП</td><td>5507293145 / 550701001</td></tr>
+      <tr><td>Руководитель</td><td>Кваша Владимир Сергеевич</td></tr>
+      <tr><td>Главный бухгалтер</td><td>Кваша Кристина Николаевна</td></tr>
+      <tr><td>Адрес</td><td>644015, Омская обл., г. Омск, ул. 22 Декабря д.108, пом. 204</td></tr>
+    </table>
+    <div class="bk-row">
+      <div class="bk-c">
+        <div class="bk-n">АО &laquo;Альфа-Банк&raquo;</div>
+        <div class="bk-r"><span class="bkk">Р/с</span><span class="bkv">40702810923050015180</span></div>
+        <div class="bk-r"><span class="bkk">БИК</span><span class="bkv">045004774</span></div>
+        <div class="bk-r"><span class="bkk">К/с</span><span class="bkv">30101810600000000774</span></div>
+      </div>
+      <div class="bk-c">
+        <div class="bk-n">Банк ВТБ (ПАО)</div>
+        <div class="bk-r"><span class="bkk">Р/с</span><span class="bkv">40702810813210002188</span></div>
+        <div class="bk-r"><span class="bkk">БИК</span><span class="bkv">044525411</span></div>
+        <div class="bk-r"><span class="bkk">К/с</span><span class="bkv">30101810145250000411</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="page-ftr" style="background:#1a1a1a;">
+    <div class="ftr-co">ООО &laquo;ПрофитЛогистикс&raquo; — ОГРН 1235500004321</div>
+    <div class="ftr-n">05 / 05</div>
+  </div>
+</div>
+</body>
+</html>

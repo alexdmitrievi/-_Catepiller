@@ -48,8 +48,9 @@ input,textarea{font-family:inherit}
 .mobile-menu a:hover{color:var(--yellow)}
 .mobile-cta{display:inline-block;background:var(--yellow);color:#0A0A0A;font-weight:700;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;padding:0.75rem 1.8rem;border-radius:4px;margin-top:1rem;cursor:pointer}
 #hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding:120px 2rem 80px}
-.hero-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,205,17,0.08) 1px,transparent 1px);background-size:32px 32px}
-.geo-shapes{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+#hero::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,10,0.92) 0%,rgba(10,10,10,0.75) 50%,rgba(10,10,10,0.88) 100%);z-index:1;pointer-events:none}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,205,17,0.08) 1px,transparent 1px);background-size:32px 32px;z-index:2}
+.geo-shapes{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:2}
 .geo-shape{position:absolute;background:linear-gradient(135deg,rgba(255,205,17,0.06),rgba(255,140,0,0.04));border:1px solid rgba(255,205,17,0.12);animation:geoFloat 8s ease-in-out infinite}
 .geo-shape:nth-child(1){width:340px;height:80px;top:18%;right:-60px;transform:rotate(-15deg);animation-delay:0s}
 .geo-shape:nth-child(2){width:200px;height:50px;top:40%;right:10%;transform:rotate(-15deg);animation-delay:1.5s}
@@ -57,12 +58,12 @@ input,textarea{font-family:inherit}
 .geo-shape:nth-child(4){width:150px;height:40px;top:60%;right:25%;transform:rotate(-15deg);animation-delay:2s}
 .geo-shape:nth-child(5){width:260px;height:60px;bottom:15%;right:5%;transform:rotate(-15deg);animation-delay:1s}
 @keyframes geoFloat{0%,100%{transform:rotate(-15deg) translateY(0)}50%{transform:rotate(-15deg) translateY(-12px)}}
-.hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;width:100%}
+.hero-content{position:relative;z-index:3;max-width:1200px;margin:0 auto;width:100%}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,205,17,0.1);border:1px solid rgba(255,205,17,0.25);border-radius:24px;padding:0.4rem 1rem;margin-bottom:2rem}
 .hero-badge-dot{width:8px;height:8px;border-radius:50%;background:var(--yellow);animation:badgePulse 2s infinite}
 @keyframes badgePulse{0%,100%{opacity:1}50%{opacity:0.4}}
 .hero-badge-text{font-size:0.78rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--yellow)}
-.hero-title{font-family:"Bebas Neue",sans-serif;font-size:clamp(2.8rem,7vw,6rem);line-height:1.05;letter-spacing:3px;color:#fff;margin-bottom:1.5rem;max-width:900px}
+.hero-title{font-family:"Bebas Neue",sans-serif;font-size:clamp(2.8rem,7vw,6rem);line-height:1.05;letter-spacing:3px;color:#fff;margin-bottom:1.5rem;max-width:900px;word-break:break-word;overflow-wrap:anywhere;}
 .hero-title .accent{color:var(--yellow);text-shadow:0 0 40px rgba(255,205,17,0.3)}
 .hero-subtitle{font-size:clamp(0.95rem,2vw,1.15rem);color:var(--text-secondary);max-width:580px;margin-bottom:3rem;line-height:1.8}
 .hero-subtitle strong{color:#fff}
@@ -140,8 +141,9 @@ input,textarea{font-family:inherit}
 .company-card-header{background:linear-gradient(135deg,#1a1500,#2a2000);border-bottom:1px solid rgba(255,205,17,0.15);padding:2rem 2.5rem;display:flex;align-items:center;gap:1.5rem}
 .company-seal{width:60px;height:60px;border-radius:50%;background:var(--yellow);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 20px rgba(255,205,17,0.3)}
 .company-seal span{font-family:"Bebas Neue",sans-serif;font-size:1.1rem;color:#0A0A0A;letter-spacing:1px}
-.company-header-info h2{font-family:"Bebas Neue",sans-serif;font-size:1.5rem;letter-spacing:2px;color:var(--yellow)}
-.company-header-info p{font-size:0.8rem;color:var(--text-secondary);margin-top:2px}
+.company-header-info{min-width:0;flex:1;overflow:hidden;}
+.company-header-info h2{font-family:"Bebas Neue",sans-serif;font-size:1.5rem;letter-spacing:2px;color:var(--yellow);word-break:break-word;}
+.company-header-info p{font-size:0.8rem;color:var(--text-secondary);margin-top:2px;word-break:break-word;}
 .company-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
 .company-section{padding:2rem 2.5rem;border-right:1px solid var(--border)}
 .company-section:last-child{border-right:none}
@@ -179,6 +181,17 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
 .footer-meta{font-size:0.78rem;color:var(--text-secondary);line-height:1.8;text-align:right}
 .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
+.float-btns{position:fixed;bottom:2rem;right:1.5rem;z-index:500;display:flex;flex-direction:column;gap:0.75rem;opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease}
+.float-btns.visible{opacity:1;transform:translateY(0)}
+.float-btn{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,0.4);transition:transform 0.2s ease,box-shadow 0.2s ease;cursor:pointer}
+.float-btn:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(0,0,0,0.5)}
+.float-btn-call{background:var(--yellow);color:#0A0A0A}
+.float-btn-email{background:#1A1A1A;border:1px solid rgba(255,205,17,0.3);color:var(--yellow)}
+.guarantee-strip{background:linear-gradient(90deg,#1a1200,#111,#1a1200);border-top:1px solid rgba(255,205,17,0.15);border-bottom:1px solid rgba(255,205,17,0.15);padding:1.5rem 2rem;overflow:hidden}
+.guarantee-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.guarantee-item{display:flex;align-items:center;gap:10px;font-size:0.85rem;font-weight:600;color:#fff;letter-spacing:0.5px;white-space:nowrap}
+.guarantee-divider{width:1px;height:30px;background:rgba(255,205,17,0.2);flex-shrink:0}
+@media(max-width:768px){.guarantee-divider{display:none}.guarantee-inner{justify-content:center;gap:1.5rem}}
 @media(max-width:1024px){
   .stats-grid{grid-template-columns:repeat(2,1fr)}
   .products-grid{grid-template-columns:repeat(2,1fr)}
@@ -199,10 +212,20 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
   .section{padding:4rem 1.5rem}
   .hero-stat{border-right:none;border-top:1px solid var(--border);padding:1rem 0}
   .hero-stats{flex-direction:column}
+  .company-row{flex-direction:column;gap:2px;}
+  .company-row-label{min-width:unset;}
+  .bank-row{flex-direction:column;align-items:flex-start;gap:2px;}
+  .bank-row-value{word-break:break-all;font-size:0.7rem;}
 }
 @media(max-width:480px){
   .hero-ctas{flex-direction:column}
   .stats-grid{grid-template-columns:1fr}
+  .hero-title{font-size:clamp(2rem,8.5vw,2.8rem);letter-spacing:1px;}
+  #hero{padding:90px 1.25rem 60px;}
+  .hero-subtitle{font-size:0.88rem;}
+  .hero-stats{display:grid;grid-template-columns:repeat(2,1fr);}
+  .hero-stat{border-right:1px solid var(--border);border-top:1px solid var(--border);padding:0.85rem 1rem;}
+  .hero-stat:nth-child(2n){border-right:none;}
 }
 </style>
 </head>
@@ -249,6 +272,7 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
     <div class="geo-shape"></div>
     <div class="geo-shape"></div>
   </div>
+  <div class="hero-image-bg" id="heroBg" style="position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;z-index:0;opacity:0;transition:opacity 1.2s ease;"></div>
   <div class="hero-content">
     <div class="hero-badge">
       <span class="hero-badge-dot"></span>
@@ -479,6 +503,36 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
   </div>
 </section>
 
+<!-- GUARANTEE STRIP -->
+<div class="guarantee-strip">
+  <div class="guarantee-inner">
+    <div class="guarantee-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span>Гарантия качества</span>
+    </div>
+    <div class="guarantee-divider"></div>
+    <div class="guarantee-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      <span>Доставка по России</span>
+    </div>
+    <div class="guarantee-divider"></div>
+    <div class="guarantee-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span>Точные сроки</span>
+    </div>
+    <div class="guarantee-divider"></div>
+    <div class="guarantee-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      <span>Конкурентные цены</span>
+    </div>
+    <div class="guarantee-divider"></div>
+    <div class="guarantee-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <span>Изготовление под ваш чертёж</span>
+    </div>
+  </div>
+</div>
+
 <!-- PROCESS SECTION -->
 <section id="process" class="section">
   <div class="section-inner">
@@ -594,6 +648,15 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
             <div class="contact-item-value">644015, Омская область, г. Омск,<br>ул. 22 Декабря д.108 помещение 204</div>
           </div>
         </div>
+        <div class="contact-info-item">
+          <div class="contact-icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div>
+            <p class="contact-item-label">КП в формате PDF</p>
+            <div class="contact-item-value"><a href="kp.html" target="_blank" style="color:var(--yellow);text-decoration:underline;text-underline-offset:3px">Открыть коммерческое предложение →</a></div>
+          </div>
+        </div>
       </div>
       <!-- RIGHT: Form -->
       <div class="reveal">
@@ -619,6 +682,16 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
     </div>
   </div>
 </section>
+
+<!-- FLOATING BUTTONS -->
+<div class="float-btns" id="floatBtns">
+  <a href="tel:+79503383384" class="float-btn float-btn-call" aria-label="Позвонить">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+  </a>
+  <a href="mailto:Profit_logistics@mail.ru" class="float-btn float-btn-email" aria-label="Email">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+  </a>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -744,6 +817,23 @@ if (ticker) {
   ticker.addEventListener("mouseenter", function() { ticker.style.animationPlayState = "paused"; });
   ticker.addEventListener("mouseleave", function() { ticker.style.animationPlayState = "running"; });
 }
+
+// Hero background image (Unsplash mining equipment)
+var heroBg = document.getElementById('heroBg');
+if(heroBg){
+  var img = new Image();
+  img.onload = function(){ heroBg.style.backgroundImage='url('+img.src+')'; heroBg.style.opacity='1'; };
+  img.src = 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80';
+}
+
+// Show float buttons after scrolling past hero
+var floatBtns = document.getElementById('floatBtns');
+window.addEventListener('scroll', function(){
+  if(floatBtns){
+    if(window.scrollY > 300){ floatBtns.classList.add('visible'); }
+    else{ floatBtns.classList.remove('visible'); }
+  }
+});
 </script>
 </body>
 </html>

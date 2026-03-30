@@ -283,7 +283,7 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
     <li><a href="#company" onclick="closeMobileMenu()">О нас</a></li>
     <li><a href="#contact" onclick="closeMobileMenu()">Контакты</a></li>
   </ul>
-  <a href="#contact" class="mobile-cta" onclick="closeMobileMenu()">Получить КП</a>
+  <a href="kp.html?autoprint=1" target="_blank" class="mobile-cta" onclick="closeMobileMenu()">Скачать КП (PDF)</a>
 </div>
 
 <!-- NAVIGATION -->
@@ -295,7 +295,7 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
     <li><a href="#company">О нас</a></li>
     <li><a href="#contact">Контакты</a></li>
   </ul>
-  <button class="nav-cta" onclick="scrollTo(0, document.getElementById(&quot;contact&quot;).offsetTop - 80)">Получить КП</button>
+  <button class="nav-cta" onclick="openKP()">Скачать КП</button>
   <button class="hamburger" id="hamburger" aria-label="Меню" onclick="toggleMobileMenu()">
     <span></span><span></span><span></span>
   </button>
@@ -731,7 +731,7 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
           </div>
           <div>
             <p class="contact-item-label">КП в формате PDF</p>
-            <div class="contact-item-value"><a href="kp.html" target="_blank" style="color:var(--yellow);text-decoration:underline;text-underline-offset:3px">Открыть коммерческое предложение →</a></div>
+            <div class="contact-item-value"><a href="kp.html?autoprint=1" target="_blank" style="color:var(--yellow);text-decoration:underline;text-underline-offset:3px" onclick="return true">Скачать коммерческое предложение PDF →</a></div>
           </div>
         </div>
       </div>
@@ -786,6 +786,11 @@ footer{background:#050505;border-top:1px solid var(--border);padding:3rem 2rem}
 </footer>
 
 <script>
+// === OPEN KP AS PDF ===
+function openKP() {
+  window.open('kp.html?autoprint=1', '_blank');
+}
+
 // === PRELOADER ===
 window.addEventListener("load", function() {
   setTimeout(function() {

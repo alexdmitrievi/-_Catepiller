@@ -448,6 +448,12 @@ if (dateEl) {
   var d = new Date();
   dateEl.textContent = months[d.getMonth()] + ' ' + d.getFullYear() + ' Г.';
 }
+// Auto-print when opened with ?autoprint=1 (triggered by "Скачать КП" button)
+if (window.location.search.indexOf('autoprint=1') !== -1) {
+  window.addEventListener('load', function() {
+    setTimeout(function() { window.print(); }, 2000);
+  });
+}
 </script>
 </body>
 </html>
